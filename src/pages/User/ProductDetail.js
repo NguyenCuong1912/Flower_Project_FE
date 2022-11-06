@@ -93,7 +93,7 @@ export default function ProductDetail(props) {
                             </ul>
                         </div>
                         <div className='flex justify-center my-8'>
-                            <img src='https://www.flowercorner.vn/image/catalog/New_June/BOUQUET-6877.jpg' alt='' />
+                            <img className='w-2/3' src='img/product/giamgia/cozy.png' alt='' />
 
                         </div>
                     </div>

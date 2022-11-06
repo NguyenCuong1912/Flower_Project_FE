@@ -3,6 +3,7 @@ import { createBrowserHistory } from 'history'
 import { Router, Switch } from 'react-router';
 import HomeTemplate from './templates/HomeTemplate/HomeTemplate';
 import Home from './pages/User/Home';
+import Product from './pages/User/Product';
 
 
 
@@ -13,6 +14,7 @@ export default function App() {
     <Router history={history}>
       <Switch>
         <HomeTemplate path="/" exact Component={Home} />
+        <HomeTemplate path="/product" exact Component={Product} />
       </Switch>
     </Router>
   )

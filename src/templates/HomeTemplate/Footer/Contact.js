@@ -5,7 +5,7 @@ import {
     FaGift
 } from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
-export default function Contact() {
+export default function Contact(props) {
     return (
         <Fragment>
             <div className='grid grid-cols-3'>

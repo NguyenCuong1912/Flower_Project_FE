@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import { NavLink } from 'react-router-dom';
 import { Rate } from 'antd';
 
-export default function Content3() {
+export default function Content3(props) {
     return (
         <Fragment>
             <div className='my-12 border-b text-center'>

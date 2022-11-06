@@ -5,6 +5,7 @@ import HomeTemplate from './templates/HomeTemplate/HomeTemplate';
 import Home from './pages/User/Home';
 import Product from './pages/User/Product';
 import ShoppingCart from './pages/User/ShoppingCart';
+import ProductDetail from './pages/User/ProductDetail';
 
 
 
@@ -16,6 +17,7 @@ export default function App() {
       <Switch>
         <HomeTemplate path="/" exact Component={Home} />
         <HomeTemplate path="/product" exact Component={Product} />
+        <HomeTemplate path="/detail" exact Component={ProductDetail} />
         <HomeTemplate path="/cart" exact Component={ShoppingCart} />
 
       </Switch>

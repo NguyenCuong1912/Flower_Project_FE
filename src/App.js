@@ -6,6 +6,9 @@ import Home from './pages/User/Home';
 import Product from './pages/User/Product';
 import ShoppingCart from './pages/User/ShoppingCart';
 import ProductDetail from './pages/User/ProductDetail';
+import UserTemplate from './templates/UserTemplate/UserTemplate';
+import Login from './pages/Login/Login';
+import Register from './pages/Register/Register';
 
 
 
@@ -19,6 +22,10 @@ export default function App() {
         <HomeTemplate path="/product" exact Component={Product} />
         <HomeTemplate path="/detail" exact Component={ProductDetail} />
         <HomeTemplate path="/cart" exact Component={ShoppingCart} />
+
+        <UserTemplate path="/login" exact Component={Login} />
+        <UserTemplate path="/register" exact Component={Register} />
+
 
       </Switch>
     </Router>

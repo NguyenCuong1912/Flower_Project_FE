@@ -16,6 +16,14 @@ export class ManageUserService extends baseService {
         return this.post(`api/Account/SignIn`, dataSignIn)
     }
 
+    getAll = () => {
+        return this.get(`api/Account`)
+    }
+
+    delUser = (id) => {
+        return this.put(`api/Account/Delete/${id}`)
+    }
+
 }
 
 export const manageUserService = new ManageUserService();

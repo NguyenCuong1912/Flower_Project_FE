@@ -14,6 +14,7 @@ export default function ManageAccount(props) {
 
     const dispatch = useDispatch();
     const { lstUser } = useSelector(state => state.ManageUserReducer);
+    console.log(lstUser)
 
 
     useEffect(() => {
@@ -23,7 +24,7 @@ export default function ManageAccount(props) {
     const columns = [
         {
             title: 'ID',
-            dataIndex: 'id'
+            dataIndex: 'id',
         },
         {
             title: 'Tài khoản',
@@ -41,11 +42,6 @@ export default function ManageAccount(props) {
         {
             title: 'Quyền',
             dataIndex: 'Role',
-            // render: (text, user) => {
-            //     return <Fragment>
-            //         {user.Role === 1 ? <span className='text-red-500'>ADMIN</span> : <span>CLIENT</span>}
-            //     </Fragment>
-            // }
         },
         {
             title: '',

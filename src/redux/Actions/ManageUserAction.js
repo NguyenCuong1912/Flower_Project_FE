@@ -28,13 +28,14 @@ export const LoginAction = (dataSignIn) => {
     return async dispatch => {
         try {
             const result = await manageUserService.signIn(dataSignIn);
+
             if (result.status === 200) {
                 dispatch({
                     type: SET_LOGIN,
                     dataSignIn: result.data
                 })
-                if (result.data.Role === "ADMIN") {
-                    await message.success("Bạn đã đăng nhập tài khoản admin!")
+                if (result.data.account.Role === "ADMIN") {
+                    message.success("Bạn đã đăng nhập tài khoản admin!")
                     history.push(`${_admin}${_account}`)
                 }
                 else {

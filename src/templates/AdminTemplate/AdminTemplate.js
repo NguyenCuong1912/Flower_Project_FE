@@ -24,7 +24,6 @@ export default function AdminTemplate(props) {
     const [collapsed, setCollapsed] = useState(false);
 
     const { userLogin } = useSelector(state => state.ManageUserReducer);
-    console.log({ userLogin })
 
     useEffect(() => {
         window.scrollTo(0, 0);

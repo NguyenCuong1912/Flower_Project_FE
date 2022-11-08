@@ -3,7 +3,8 @@ import { useFormik } from 'formik'
 import { useDispatch } from 'react-redux';
 import { RegisterAction } from './../../redux/Actions/ManageUserAction';
 import { NavLink } from 'react-router-dom';
-import { _login } from '../../utils/util/ConfigPath';
+import { _home, _login } from '../../utils/util/ConfigPath';
+import { history } from '../../App';
 export default function Register(props) {
 
     const dispatch = useDispatch();
@@ -25,8 +26,10 @@ export default function Register(props) {
             <section className="h-screen">
                 <div className="px-6 h-full text-gray-800">
                     <div className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6">
-                        <div className="grow-0 flex justify-center shrink-1 md:shrink-0 basis-auto xl:w-6/12 lg:w-6/12 md:w-9/12 mb-12 md:mb-0">
-                            <img src="https://www.flowercorner.vn/image/catalog/New%20Sep/red-wine.jpg" className="w-5/6 rounded shadow-2xl drop-shadow-2xl mb-8" alt='' />
+                        <div onClick={() => {
+                            history.push(`${_home}`)
+                        }} className="grow-0 flex justify-center shrink-1 md:shrink-0 basis-auto xl:w-6/12 lg:w-6/12 md:w-9/12 mb-12 md:mb-0">
+                            <img title='Trở lại trang chủ' src="https://www.flowercorner.vn/image/catalog/New%20Sep/red-wine.jpg" className="w-5/6 rounded shadow-2xl drop-shadow-2xl mb-8 cursor-pointer" alt='' />
                         </div>
                         <div className="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
                             <form onSubmit={formik.handleSubmit}>

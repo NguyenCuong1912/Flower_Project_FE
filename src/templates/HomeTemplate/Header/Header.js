@@ -3,42 +3,80 @@ import {
     FaFacebookF,
     FaFacebookMessenger,
     FaPhoneAlt,
-    FaAngleDown,
-    FaRegUser,
-
 } from "react-icons/fa";
 import {
     AiOutlineLogin,
-    AiFillEdit
+    AiOutlineForm,
+    AiOutlineUser
 } from "react-icons/ai";
-import { Dropdown, Space, Input } from 'antd';
+import { Input, Dropdown, Space } from 'antd';
 import { NavLink } from 'react-router-dom';
 import NavHeader from './NavHeader';
-
+import { _home, _login, _register } from './../../../utils/util/ConfigPath';
+import { useSelector } from 'react-redux';
+import { USER_LOGIN } from '../../../redux/Types/ManageUserType';
+import { history } from '../../../App';
+import _ from 'lodash'
 const { Search } = Input;
 const onSearch = (value) => console.log(value);
 
 const items = [
     {
-        label: (
-            <NavLink to='' className='p-2 flex text-lg' >
-                <AiOutlineLogin className='mt-1 mr-2' />
-                Đăng nhập
-            </NavLink>
-        ),
+        label: <button onClick={() => {
+            sessionStorage.removeItem(USER_LOGIN);
+            history.push(`${_home}`);
+            window.location.reload();
+        }} className="self-center px-4 py-2 hover:text-red-500">Đăng xuất</button>,
         key: '0',
     },
     {
-        label: (
-            <NavLink to='' className='p-2 flex text-lg'>
-                <AiFillEdit className='mt-1 mr-2' />
-                Đăng ký
-            </NavLink>
-        ),
+        label: <button onClick={() => {
+            history.push(`${_home}`);
+            window.location.reload();
+        }} className="self-center px-4 py-2 hover:text-red-500">Thông tin tài khoản</button>,
         key: '1',
     },
+    {
+        label: <button onClick={() => {
+            history.push(`${_home}`);
+            window.location.reload();
+        }} className="self-center px-4 py-2 hover:text-red-500">Lịch sử đặt hàng</button>,
+        key: '2',
+    },
 ];
-export default function Header() {
+
+export default function Header(props) {
+    const { userLogin } = useSelector(state => state.ManageUserReducer);
+    console.log({ userLogin })
+
+    const operations = <Fragment>
+        {!_.isEmpty(userLogin) ?
+            <Dropdown
+                menu={{
+                    items,
+                }}
+                trigger={['click']}
+            >
+                <span onClick={(e) => e.preventDefault()}>
+                    <Space>
+                        <div className='flex items-center text-black ml-4 cursor-pointer'>
+                            <AiOutlineUser className='text-2xl mr-1' />
+                            <span className='flex items-center text-lg font-bold '>Xin chào!, {userLogin.account.Username}</span>
+                        </div>
+                    </Space>
+                </span>
+            </Dropdown>
+            : <Fragment>
+                <NavLink to={_login} className='flex py-2 mr-2 text-black hover:text-red-500'>
+                    <AiOutlineLogin className='text-lg my-1 mx-2' />
+                    <span>Đăng nhập</span>
+                </NavLink>
+                <NavLink to={_register} className='flex py-2 text-black hover:text-red-500'>
+                    <AiOutlineForm className='text-lg my-1 mx-2' />
+                    <span>Đăng ký</span>
+                </NavLink>
+            </Fragment>}
+    </Fragment>
     return (
         <Fragment>
             <div className='grid grid-cols-5'>
@@ -54,33 +92,20 @@ export default function Header() {
                             <NavLink to='' title='Liên hệ GiftLove qua điện thoại: 19001508' className='h-11 w-11 bg-red-500 border rounded-full text-white grid place-items-center hover:border-red-500 hover:bg-white hover:text-red-500'>
                                 <FaPhoneAlt />
                             </NavLink>
+
                         </div>
                         <div className='ml-12 my-6'>
                             <img src='img/logo.png' alt='GiftLove' />
                         </div>
-                        <div className='flex items-center ml-32'>
+                        <div className='flex items-center'>
                             <Search
                                 placeholder="Tìm kiếm sản phẩm..."
                                 onSearch={onSearch}
                                 style={{
-                                    width: 200,
-                                    marginRight: 8,
+                                    width: 180,
                                 }}
                             />
-                            <Dropdown
-                                menu={{
-                                    items,
-                                }}
-                            >
-                                <NavLink to='' onClick={(e) => e.preventDefault()}>
-                                    <Space>
-                                        <span className='flex text-lg text-black hover:text-red-500'>
-                                            <FaRegUser />
-                                            <FaAngleDown />
-                                        </span>
-                                    </Space>
-                                </NavLink>
-                            </Dropdown>
+                            <div className='flex mt-1'>{operations}</div>
                         </div>
                     </div>
                 </div>

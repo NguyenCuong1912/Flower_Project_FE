@@ -14,7 +14,7 @@ export default function ManageAccount(props) {
 
     const dispatch = useDispatch();
     const { lstUser } = useSelector(state => state.ManageUserReducer);
-    console.log(lstUser)
+    console.log("lstUser", lstUser)
 
 
     useEffect(() => {
@@ -35,7 +35,7 @@ export default function ManageAccount(props) {
             dataIndex: 'PhoneNumber',
             render: (text, user) => {
                 return <Fragment>
-                    {user.PhoneNumber === null ? <marquee className='text-red-500'>FBI Warning: DCMM</marquee> : <span>{user.PhoneNumber}</span>}
+                    { user.PhoneNumber === null ? <marquee className='text-red-500'>FBI Warning: DCMM</marquee> : <span>{ user.PhoneNumber }</span> }
                 </Fragment>
             }
         },
@@ -48,36 +48,36 @@ export default function ManageAccount(props) {
             dataIndex: 'id',
             render: (text, user) => {
                 return <div className='flex'>
-                    <button className='mx-4 text-green-500 hover:text-green-900' title='Sửa' onClick={() => {
+                    <button className='mx-4 text-green-500 hover:text-green-900' title='Sửa' onClick={ () => {
                         history.push(`${_admin}${_account}${_edit}/${user.id}`)
-                    }}>
-                        <EditOutlined style={{ fontSize: 25 }} />
+                    } }>
+                        <EditOutlined style={ { fontSize: 25 } } />
                     </button>
-                    <button className='mx-4 text-red-500 hover:text-red-900' title='Xóa' onClick={() => {
+                    <button className='mx-4 text-red-500 hover:text-red-900' title='Xóa' onClick={ () => {
                         dispatch(DeleteUser(user.id))
                         console.log('first', user.id)
 
-                    }}>
-                        <DeleteOutlined style={{ fontSize: 25 }} />
+                    } }>
+                        <DeleteOutlined style={ { fontSize: 25 } } />
                     </button>
                 </div>
             },
         },
     ]
-
+    const DataRow = lstUser
     return (
         <Fragment>
             <div className='container mt-4'>
                 <h2 className='text-4xl font-bold text-center text-red-500'>Quản lý Users</h2>
                 <div className='my-10 flex justify-between'>
-                    <button type='button' className='border-2 border-blue-900 rounded w-24 h-10 text-lg font-bold text-red-500 hover:text-white hover:bg-red-600' onClick={() => {
+                    <button type='button' className='border-2 border-blue-900 rounded w-24 h-10 text-lg font-bold text-red-500 hover:text-white hover:bg-red-600' onClick={ () => {
                         history.push(`${_admin}${_account}${_add}`)
-                    }}>Thêm </button>
+                    } }>Thêm </button>
                     <div className='w-1/2'>
-                        <Search size='large' placeholder="Bạn muốn tìm gì?..." onSearch={onSearch} enterButton />
+                        <Search size='large' placeholder="Bạn muốn tìm gì?..." onSearch={ onSearch } enterButton />
                     </div>
                 </div>
-                <Table dataSource={lstUser} columns={columns} rowKey='id' />;
+                <Table dataSource={ DataRow } columns={ columns } rowKey='id' />;
             </div>
         </Fragment>
     )

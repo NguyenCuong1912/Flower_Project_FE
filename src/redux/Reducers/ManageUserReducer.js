@@ -10,7 +10,7 @@ const initialState = {
 export const ManageUserReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_LOGIN: {
-            state.lstUser = action.dataSignIn
+            // state.lstUser = action.dataSignIn
             return { ...state }
         }
 

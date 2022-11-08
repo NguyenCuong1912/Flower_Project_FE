@@ -56,7 +56,7 @@ export default function EditAccount(props) {
                             <input type="text" name='PhoneNumber' onChange={formik.handleChange} value={formik.values.PhoneNumber} className='p-3 border-gray border rounded-lg focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 w-full' placeholder="Nhập số điện thoại..." />
 
                             <div className='text-end mt-16'>
-                                <button type='submit' className='border-2 border-blue-900 rounded w-24 h-10 text-lg font-bold text-red-500 hover:text-white hover:bg-red-900' >Cập nhật</button>
+                                <button type='submit' className='border-2 border-blue-900 rounded w-24 h-10 text-lg font-bold text-red-500 hover:text-white hover:bg-red-500' >Cập nhật</button>
                             </div>
                         </form>
                     </div>

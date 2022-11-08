@@ -20,9 +20,11 @@ import {
   _cart,
   _login,
   _register,
-  _edit
+  _edit,
+  _add
 } from './utils/util/ConfigPath';
 import EditAccount from './pages/Admin/Account/EditAccount';
+import AddAccount from './pages/Admin/Account/AddAccount';
 
 
 
@@ -42,6 +44,7 @@ export default function App() {
 
 
         <AdminTemplate path={`${_admin}${_account}`} exact Component={ManageAccount} />
+        <AdminTemplate path={`${_admin}${_account}${_add}`} exact Component={AddAccount} />
         <AdminTemplate path={`${_admin}${_account}${_edit}/:id`} exact Component={EditAccount} />
 
 

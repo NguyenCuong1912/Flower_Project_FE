@@ -4,7 +4,7 @@ import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { DeleteUser, GetListUserAction } from '../../../redux/Actions/ManageUserAction';
 import { history } from '../../../App';
-import { _account, _admin, _edit } from './../../../utils/util/ConfigPath';
+import { _account, _add, _admin, _edit } from './../../../utils/util/ConfigPath';
 
 
 
@@ -75,7 +75,7 @@ export default function ManageAccount(props) {
                 <h2 className='text-4xl font-bold text-center text-red-500'>Quản lý Users</h2>
                 <div className='my-10 flex justify-between'>
                     <button type='button' className='border-2 border-blue-900 rounded w-24 h-10 text-lg font-bold text-red-500 hover:text-white hover:bg-red-600' onClick={() => {
-                        // history.push('/admin/films/add')
+                        history.push(`${_admin}${_account}${_add}`)
                     }}>Thêm </button>
                     <div className='w-1/2'>
                         <Search size='large' placeholder="Bạn muốn tìm gì?..." onSearch={onSearch} enterButton />

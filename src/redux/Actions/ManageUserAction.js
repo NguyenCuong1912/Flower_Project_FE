@@ -67,6 +67,26 @@ export const GetListUserAction = () => {
     }
 }
 
+export const AddUserAction = (data) => {
+    return async dispatch => {
+        try {
+            const result = await manageUserService.signUp(data);
+            if (result.status === 201) {
+                await message.success("Thêm mới tài khoản thành công!")
+                history.push(`${_admin}${_account}`)
+                dispatch(GetListUserAction())
+            }
+            else {
+                message.error("Thêm mới thất bại!")
+            }
+
+        } catch (error) {
+            console.log('error', error.response?.data)
+            message.error("Tài khoản này đã tồn tại!")
+        }
+    }
+}
+
 export const GetDetailUserAction = (id) => {
     return async dispatch => {
         try {

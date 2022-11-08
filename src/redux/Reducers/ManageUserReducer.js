@@ -1,8 +1,14 @@
-import { GET_ALL_USER, GET_DETAIL, SET_LOGIN } from "../Types/ManageUserType"
+import { GET_ALL_USER, GET_DETAIL, SET_LOGIN, USER_LOGIN } from "../Types/ManageUserType"
 
+
+let userDefault = {};
+if (sessionStorage.getItem(USER_LOGIN)) {
+    userDefault = JSON.parse(sessionStorage.getItem(USER_LOGIN));
+
+}
 
 const initialState = {
-    userLogin: [],
+    userLogin: userDefault,
     lstUser: [],
     editUser: []
 }
@@ -11,8 +17,10 @@ const initialState = {
 export const ManageUserReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_LOGIN: {
-            state.userLogin = action.dataSignIn
-            return { ...state }
+            const { dataSignIn } = action;
+            sessionStorage.setItem(USER_LOGIN, JSON.stringify(dataSignIn));
+
+            return { ...state, userLogin: dataSignIn }
         }
 
         case GET_ALL_USER: {

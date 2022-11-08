@@ -18,6 +18,7 @@ export const RegisterAction = (dataSignUp) => {
             }
 
         } catch (error) {
+            message.error("Tài khoản này đã tồn tại!")
             console.log('error', error.response?.data)
         }
     }
@@ -39,12 +40,13 @@ export const LoginAction = (dataSignIn) => {
                     history.push(`${_admin}${_account}`)
                 }
                 else {
-                    await message.success("Đăng nhập thành công!")
+                    message.success("Đăng nhập thành công!")
                     history.push(`${_home}`)
                 }
 
             }
         } catch (error) {
+            message.warning("Sai thông tin tài khoản hoặc mật khẩu!")
             console.log('error', error.response?.data)
         }
     }

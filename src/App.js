@@ -42,7 +42,7 @@ export default function App() {
 
 
         <AdminTemplate path={`${_admin}${_account}`} exact Component={ManageAccount} />
-        <AdminTemplate path={`${_admin}${_account}${_edit}:id`} exact Component={EditAccount} />
+        <AdminTemplate path={`${_admin}${_account}${_edit}/:id`} exact Component={EditAccount} />
 
 
 

@@ -1,8 +1,9 @@
-import { GET_ALL_USER, SET_LOGIN } from "../Types/ManageUserType"
+import { GET_ALL_USER, GET_DETAIL, SET_LOGIN } from "../Types/ManageUserType"
 
 
 const initialState = {
-    lstUser: []
+    lstUser: [],
+    editUser: []
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -15,6 +16,11 @@ export const ManageUserReducer = (state = initialState, action) => {
 
         case GET_ALL_USER: {
             state.lstUser = action.dataUser
+            return { ...state }
+        }
+
+        case GET_DETAIL: {
+            state.editUser = action.dataDetail
             return { ...state }
         }
         default:

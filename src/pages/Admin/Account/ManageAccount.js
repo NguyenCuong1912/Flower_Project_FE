@@ -3,6 +3,8 @@ import { Table, Input } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { DeleteUser, GetListUserAction } from '../../../redux/Actions/ManageUserAction';
+import { history } from '../../../App';
+import { _account, _admin, _edit } from './../../../utils/util/ConfigPath';
 
 
 
@@ -32,22 +34,18 @@ export default function ManageAccount(props) {
             dataIndex: 'PhoneNumber',
             render: (text, user) => {
                 return <Fragment>
-                    {user.PhoneNumber === null ? <marquee className='text-red-500'>FBI Warning: DCMM</marquee> : <span className='text-red-500'>{user.PhoneNumber}</span>}
+                    {user.PhoneNumber === null ? <marquee className='text-red-500'>FBI Warning: DCMM</marquee> : <span>{user.PhoneNumber}</span>}
                 </Fragment>
             }
         },
         {
-            title: 'Vị trí',
-            dataIndex: 'Role'
-        },
-        {
-            title: 'Trạng thái',
-            dataIndex: 'IsActive',
-            render: (text, user) => {
-                return <Fragment>
-                    {user.IsActive === true ? <span className='text-green-500'>Active</span> : <span className='text-red-500'>inActive</span>}
-                </Fragment>
-            }
+            title: 'Quyền',
+            dataIndex: 'Role',
+            // render: (text, user) => {
+            //     return <Fragment>
+            //         {user.Role === 1 ? <span className='text-red-500'>ADMIN</span> : <span>CLIENT</span>}
+            //     </Fragment>
+            // }
         },
         {
             title: '',
@@ -55,7 +53,7 @@ export default function ManageAccount(props) {
             render: (text, user) => {
                 return <div className='flex'>
                     <button className='mx-4 text-green-500 hover:text-green-900' title='Sửa' onClick={() => {
-                        // history.push(`/admin/films/edit/${record.maPhim}`)
+                        history.push(`${_admin}${_account}${_edit}/${user.id}`)
                     }}>
                         <EditOutlined style={{ fontSize: 25 }} />
                     </button>

@@ -2,7 +2,7 @@
 import { manageUserService } from "../../services/ManageUserService";
 import { history } from './../../App';
 import { message } from 'antd';
-import { GET_ALL_USER, SET_LOGIN } from './../Types/ManageUserType';
+import { GET_ALL_USER, GET_DETAIL, SET_LOGIN } from './../Types/ManageUserType';
 import { _login, _home, _admin, _account } from './../../utils/util/ConfigPath';
 
 export const RegisterAction = (dataSignUp) => {
@@ -59,6 +59,44 @@ export const GetListUserAction = () => {
                     type: GET_ALL_USER,
                     dataUser: result.data
                 })
+            }
+        } catch (error) {
+            console.log('error', error.response?.data)
+
+        }
+    }
+}
+
+export const GetDetailUserAction = (id) => {
+    return async dispatch => {
+        try {
+            const result = await manageUserService.getDetail(id);
+            if (result.status === 200) {
+                dispatch({
+                    type: GET_DETAIL,
+                    dataDetail: result.data
+                })
+            }
+            else {
+                message.warning('error!')
+            }
+        } catch (error) {
+            console.log('error', error.response?.data)
+
+        }
+    }
+}
+
+export const UpdateUserAction = (id, data) => {
+    return async dispatch => {
+        try {
+            const result = await manageUserService.updateAccount(id, data);
+            if (result.status === 200) {
+                await message.success("Cập nhật tài khoản thành công!")
+                history.push(`${_admin}${_account}`)
+            }
+            else {
+                message.error("Cập nhật tài khoản thất bại!")
             }
         } catch (error) {
             console.log('error', error.response?.data)

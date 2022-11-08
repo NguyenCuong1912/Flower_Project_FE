@@ -2,6 +2,8 @@ import React, { Fragment } from 'react'
 import { useFormik } from 'formik'
 import { useDispatch } from 'react-redux';
 import { RegisterAction } from './../../redux/Actions/ManageUserAction';
+import { NavLink } from 'react-router-dom';
+import { _login } from '../../utils/util/ConfigPath';
 export default function Register(props) {
 
     const dispatch = useDispatch();
@@ -41,8 +43,12 @@ export default function Register(props) {
                                     <button type="submit" className="inline-block px-7 py-3 bg-red-500 border border-red-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-white hover:text-red-500 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out">
                                         Đăng ký
                                     </button>
-
+                                    <p className="text-sm font-semibold mt-2 pt-1 mb-0">
+                                        Bạn đã có tài khoản?
+                                        <NavLink to={_login} className="ml-2 text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out">Đăng nhập</NavLink>
+                                    </p>
                                 </div>
+
                             </form>
                         </div>
                     </div>

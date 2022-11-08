@@ -9,6 +9,22 @@ import ProductDetail from './pages/User/ProductDetail';
 import UserTemplate from './templates/UserTemplate/UserTemplate';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
+import AdminTemplate from './templates/AdminTemplate/AdminTemplate';
+import ManageAccount from './pages/Admin/Account/ManageAccount';
+import {
+  _account,
+  _admin,
+  _home,
+  _product,
+  _detail,
+  _cart,
+  _login,
+  _register,
+  _edit,
+  _add
+} from './utils/util/ConfigPath';
+import EditAccount from './pages/Admin/Account/EditAccount';
+import AddAccount from './pages/Admin/Account/AddAccount';
 
 
 
@@ -18,13 +34,19 @@ export default function App() {
   return (
     <Router history={history}>
       <Switch>
-        <HomeTemplate path="/" exact Component={Home} />
-        <HomeTemplate path="/product" exact Component={Product} />
-        <HomeTemplate path="/detail" exact Component={ProductDetail} />
-        <HomeTemplate path="/cart" exact Component={ShoppingCart} />
+        <HomeTemplate path={_home} exact Component={Home} />
+        <HomeTemplate path={_product} exact Component={Product} />
+        <HomeTemplate path={_detail} exact Component={ProductDetail} />
+        <HomeTemplate path={_cart} exact Component={ShoppingCart} />
 
-        <UserTemplate path="/login" exact Component={Login} />
-        <UserTemplate path="/register" exact Component={Register} />
+        <UserTemplate path={_login} exact Component={Login} />
+        <UserTemplate path={_register} exact Component={Register} />
+
+
+        <AdminTemplate path={`${_admin}${_account}`} exact Component={ManageAccount} />
+        <AdminTemplate path={`${_admin}${_account}${_add}`} exact Component={AddAccount} />
+        <AdminTemplate path={`${_admin}${_account}${_edit}/:id`} exact Component={EditAccount} />
+
 
 
       </Switch>

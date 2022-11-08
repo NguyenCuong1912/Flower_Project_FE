@@ -8,6 +8,7 @@ import {
     FaTwitter
 } from "react-icons/fa";
 import { LoginAction } from '../../redux/Actions/ManageUserAction';
+import { _register } from '../../utils/util/ConfigPath';
 
 export default function Login(props) {
 
@@ -68,7 +69,7 @@ export default function Login(props) {
                                     </button>
                                     <p className="text-sm font-semibold mt-2 pt-1 mb-0">
                                         Bạn chưa có tài khoản?
-                                        <NavLink to="/register" className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out">Đăng ký</NavLink>
+                                        <NavLink to={_register} className="ml-2 text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out">Đăng ký</NavLink>
                                     </p>
                                 </div>
                             </form>

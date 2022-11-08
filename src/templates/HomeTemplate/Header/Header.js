@@ -23,26 +23,28 @@ const onSearch = (value) => console.log(value);
 const items = [
     {
         label: <button onClick={() => {
-            sessionStorage.removeItem(USER_LOGIN);
             history.push(`${_home}`);
             window.location.reload();
-        }} className="self-center px-4 py-2 hover:text-red-500">Đăng xuất</button>,
+        }} className="self-center px-4 py-2 hover:text-red-500">Thông tin tài khoản</button>,
         key: '0',
     },
     {
         label: <button onClick={() => {
             history.push(`${_home}`);
             window.location.reload();
-        }} className="self-center px-4 py-2 hover:text-red-500">Thông tin tài khoản</button>,
+        }} className="self-center px-4 py-2 hover:text-red-500">Lịch sử đặt hàng</button>,
         key: '1',
     },
     {
         label: <button onClick={() => {
+            sessionStorage.removeItem(USER_LOGIN);
             history.push(`${_home}`);
             window.location.reload();
-        }} className="self-center px-4 py-2 hover:text-red-500">Lịch sử đặt hàng</button>,
+        }} className="self-center px-4 py-2 hover:text-red-500">Đăng xuất</button>,
         key: '2',
     },
+
+
 ];
 
 export default function Header(props) {

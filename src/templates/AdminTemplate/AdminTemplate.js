@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 import {
     UserOutlined,
 } from '@ant-design/icons';
@@ -8,6 +8,7 @@ import { Layout, Menu } from 'antd';
 import { Route } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import { _account, _admin } from '../../utils/util/ConfigPath';
+import { useSelector } from 'react-redux';
 
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -15,11 +16,11 @@ export default function AdminTemplate(props) {
     const { Component, ...restRoute } = props;
     const [collapsed, setCollapsed] = useState(false);
 
-    // const { userLogin } = useSelector(state => state.QuanLyUserReducer);
-    // console.log({ userLogin })
-    // useEffect(() => {
-    //     window.scrollTo(0, 0);
-    // })
+    const { lstUser } = useSelector(state => state.ManageUserReducer);
+    console.log('login', lstUser)
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    })
     // const operations = <Fragment>
     //     {!_.isEmpty(userLogin) ? <div className='flex'>
     //         <NavLink to='/profile' className='flex'>

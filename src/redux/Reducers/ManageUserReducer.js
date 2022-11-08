@@ -2,6 +2,7 @@ import { GET_ALL_USER, GET_DETAIL, SET_LOGIN } from "../Types/ManageUserType"
 
 
 const initialState = {
+    userLogin: [],
     lstUser: [],
     editUser: []
 }
@@ -10,7 +11,7 @@ const initialState = {
 export const ManageUserReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_LOGIN: {
-            state.lstUser = action.dataSignIn
+            state.userLogin = action.dataSignIn
             return { ...state }
         }
 

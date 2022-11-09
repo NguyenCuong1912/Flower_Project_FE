@@ -19,7 +19,6 @@ export const ManageUserReducer = (state = initialState, action) => {
         case SET_LOGIN: {
             const { dataSignIn } = action;
             sessionStorage.setItem(USER_LOGIN, JSON.stringify(dataSignIn));
-
             return { ...state, userLogin: dataSignIn }
         }
 

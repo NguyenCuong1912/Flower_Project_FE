@@ -21,10 +21,15 @@ import {
   _login,
   _register,
   _edit,
-  _add
+  _add,
+  _order
 } from './utils/util/ConfigPath';
 import EditAccount from './pages/Admin/Account/EditAccount';
 import AddAccount from './pages/Admin/Account/AddAccount';
+import AccountTemplate from './templates/AccountTemplate/AccountTemplate';
+import DetailAccount from './pages/User/Account/DetailAccount';
+import OrderAccount from './pages/User/Account/OrderAccount';
+import UpdateAccount from './pages/User/Account/UpdateAccount';
 
 
 
@@ -38,6 +43,12 @@ export default function App() {
         <HomeTemplate path={_product} exact Component={Product} />
         <HomeTemplate path={_detail} exact Component={ProductDetail} />
         <HomeTemplate path={_cart} exact Component={ShoppingCart} />
+        <AccountTemplate path={_account} exact Component={DetailAccount} />
+        <AccountTemplate path={`${_account}${_order}`} exact Component={OrderAccount} />
+        <AccountTemplate path={`${_account}${_edit}`} exact Component={UpdateAccount} />
+
+
+
 
         <UserTemplate path={_login} exact Component={Login} />
         <UserTemplate path={_register} exact Component={Register} />

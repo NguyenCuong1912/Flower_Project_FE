@@ -12,7 +12,7 @@ import {
 import { Input, Dropdown, Space } from 'antd';
 import { NavLink } from 'react-router-dom';
 import NavHeader from './NavHeader';
-import { _home, _login, _register } from './../../../utils/util/ConfigPath';
+import { _account, _home, _login, _register } from './../../../utils/util/ConfigPath';
 import { useSelector } from 'react-redux';
 import { USER_LOGIN } from '../../../redux/Types/ManageUserType';
 import { history } from '../../../App';
@@ -23,7 +23,7 @@ const onSearch = (value) => console.log(value);
 const items = [
     {
         label: <button onClick={() => {
-            history.push(`${_home}`);
+            history.push(`${_account}`);
             window.location.reload();
         }} className="self-center px-4 py-2 hover:text-red-500">Thông tin tài khoản</button>,
         key: '0',
@@ -49,7 +49,6 @@ const items = [
 
 export default function Header(props) {
     const { userLogin } = useSelector(state => state.ManageUserReducer);
-    console.log({ userLogin })
 
     const operations = <Fragment>
         {!_.isEmpty(userLogin) ?
@@ -96,7 +95,9 @@ export default function Header(props) {
                             </NavLink>
 
                         </div>
-                        <div className='ml-12 my-6'>
+                        <div className='ml-12 my-6 cursor-pointer' onClick={() => {
+                            history.push(`${_home}`);
+                        }}>
                             <img src='img/logo.png' alt='GiftLove' />
                         </div>
                         <div className='flex items-center'>

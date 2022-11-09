@@ -5,6 +5,10 @@ export const _home = '/'
 export const _product = '/product'
 export const _detail = '/detail'
 export const _cart = '/cart'
+export const _order = '/order'
+
+
+
 
 export const _login = '/login'
 export const _register = '/register'

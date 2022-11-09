@@ -32,9 +32,6 @@ export default function EditAccount(props) {
                 .min(6, "Tối thiểu 6 kí tự")
                 .required("Không được trống !"),
 
-            Role: Yup.string()
-                .required("Không được trống !"),
-
             PhoneNumber: Yup.string()
                 .matches(/(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/, {
                     message: "Số điện thoại chưa đúng",

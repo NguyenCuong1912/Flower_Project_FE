@@ -127,6 +127,23 @@ export const UpdateUserAction = (id, data) => {
         }
     }
 }
+export const UpdateAccountAction = (id, data) => {
+    return async dispatch => {
+        try {
+            const result = await manageUserService.updateAccount(id, data);
+            if (result.status === 200) {
+                await message.success("Cập nhật tài khoản thành công!")
+                window.location.reload();
+            }
+            else {
+                message.error("Cập nhật tài khoản thất bại!")
+            }
+        } catch (error) {
+            console.log('error', error.response?.data)
+
+        }
+    }
+}
 
 
 export const DeleteUser = (id) => {

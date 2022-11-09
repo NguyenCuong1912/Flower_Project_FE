@@ -28,9 +28,6 @@ export default function EditAccount(props) {
             PhoneNumber: editUser.PhoneNumber
         },
         validationSchema: Yup.object({
-            UserName: Yup.string()
-                .required("Không được trống !"),
-
             Password: Yup.string()
                 .min(6, "Tối thiểu 6 kí tự")
                 .required("Không được trống !"),

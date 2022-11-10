@@ -18,6 +18,7 @@ export const RegisterAction = (dataSignUp) => {
             }
 
         } catch (error) {
+            message.error("Tài khoản này đã tồn tại!")
             console.log('error', error.response?.data)
         }
     }
@@ -39,12 +40,13 @@ export const LoginAction = (dataSignIn) => {
                     history.push(`${_admin}${_account}`)
                 }
                 else {
-                    await message.success("Đăng nhập thành công!")
+                    message.success("Đăng nhập thành công!")
                     history.push(`${_home}`)
                 }
 
             }
         } catch (error) {
+            message.warning("Sai thông tin tài khoản hoặc mật khẩu!")
             console.log('error', error.response?.data)
         }
     }
@@ -115,6 +117,25 @@ export const UpdateUserAction = (id, data) => {
             if (result.status === 200) {
                 await message.success("Cập nhật tài khoản thành công!")
                 history.push(`${_admin}${_account}`)
+            }
+            else {
+                message.error("Cập nhật tài khoản thất bại!")
+            }
+        } catch (error) {
+            console.log('error', error.response?.data)
+
+        }
+    }
+}
+export const UpdateAccountAction = (id, data) => {
+    return async dispatch => {
+        try {
+            const result = await manageUserService.updateAccount(id, data);
+            if (result.status === 200) {
+
+                await message.success("Cập nhật tài khoản thành công!")
+                alert('Bạn cần đăng nhập lại!')
+                history.push(`${_login}`)
             }
             else {
                 message.error("Cập nhật tài khoản thất bại!")

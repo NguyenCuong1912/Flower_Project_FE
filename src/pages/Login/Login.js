@@ -5,10 +5,12 @@ import { useFormik } from 'formik'
 import {
     FaFacebookF,
     FaFacebookMessenger,
-    FaTwitter
+    FaTwitter,
+    FaHome
 } from "react-icons/fa";
 import { LoginAction } from '../../redux/Actions/ManageUserAction';
-import { _register } from '../../utils/util/ConfigPath';
+import { _home, _register } from '../../utils/util/ConfigPath';
+import { history } from '../../App';
 
 export default function Login(props) {
 
@@ -29,23 +31,34 @@ export default function Login(props) {
             <section className="h-screen">
                 <div className="px-6 h-full text-gray-800">
                     <div className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6">
-                        <div className="grow-0 flex justify-center shrink-1 md:shrink-0 basis-auto xl:w-6/12 lg:w-6/12 md:w-9/12 mb-12 md:mb-0">
-                            <img src="https://www.flowercorner.vn/image/catalog/New%20Sep/ban-mai.jpg" className="w-5/6 rounded shadow-2xl drop-shadow-2xl mb-8" alt='' />
+                        <div onClick={() => {
+                            history.push(`${_home}`)
+                        }} className="grow-0 flex justify-center shrink-1 md:shrink-0 basis-auto xl:w-6/12 lg:w-6/12 md:w-9/12 mb-12 md:mb-0">
+                            <img title='Trở về trang chủ' src="https://www.flowercorner.vn/image/catalog/New%20Sep/ban-mai.jpg" className="w-5/6 rounded shadow-2xl drop-shadow-2xl mb-8 cursor-pointer" alt='' />
                         </div>
                         <div className="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
                             <form onSubmit={formik.handleSubmit}>
-                                <div className="flex flex-row items-center justify-center lg:justify-start">
-                                    <p className="text-lg mb-0 mr-4">Đăng nhập với:</p>
+                                <div className="w-full flex justify-between lg:justify-between">
+                                    <div className='flex flex-row items-center'>
+                                        <p className="text-lg mb-0 mr-4">Đăng nhập với:</p>
 
-                                    <NavLink to='' title='Facebook' className='h-11 w-11 bg-blue-900 border rounded-full text-white grid place-items-center hover:border-blue-900 hover:bg-white hover:text-blue-900'>
-                                        <FaFacebookF />
-                                    </NavLink>
-                                    <NavLink to='' title='Zalo' className='mx-2 h-11 w-11 bg-cyan-400 border rounded-full text-white grid place-items-center hover:border-cyan-400 hover:bg-white hover:text-cyan-400'>
-                                        <FaFacebookMessenger />
-                                    </NavLink>
-                                    <NavLink to='' title='Twitter' className='h-11 w-11 bg-red-500 border rounded-full text-white grid place-items-center hover:border-red-500 hover:bg-white hover:text-red-500'>
-                                        <FaTwitter />
-                                    </NavLink>
+                                        <NavLink to='' title='Facebook' className='h-11 w-11 bg-blue-900 border rounded-full text-white grid place-items-center hover:border-blue-900 hover:bg-white hover:text-blue-900'>
+                                            <FaFacebookF />
+                                        </NavLink>
+                                        <NavLink to='' title='Zalo' className='mx-2 h-11 w-11 bg-cyan-400 border rounded-full text-white grid place-items-center hover:border-cyan-400 hover:bg-white hover:text-cyan-400'>
+                                            <FaFacebookMessenger />
+                                        </NavLink>
+                                        <NavLink to='' title='Twitter' className='h-11 w-11 bg-red-500 border rounded-full text-white grid place-items-center hover:border-red-500 hover:bg-white hover:text-red-500'>
+                                            <FaTwitter />
+                                        </NavLink>
+                                    </div>
+                                    <div>
+                                        <button type="button" title='Trang chủ' onClick={() => {
+                                            history.push(`${_home}`)
+                                        }} className="inline-block px-4 py-3 bg-red-500 border border-red-500 text-white font-medium text-2xl leading-snug uppercase rounded shadow-md hover:bg-white hover:text-red-500 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out">
+                                            <FaHome />
+                                        </button>
+                                    </div>
                                 </div>
                                 <div className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
                                     <p className="text-center font-semibold mx-4 mb-0">Or</p>

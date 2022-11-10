@@ -132,8 +132,10 @@ export const UpdateAccountAction = (id, data) => {
         try {
             const result = await manageUserService.updateAccount(id, data);
             if (result.status === 200) {
+
                 await message.success("Cập nhật tài khoản thành công!")
-                window.location.reload();
+                alert('Bạn cần đăng nhập lại!')
+                history.push(`${_login}`)
             }
             else {
                 message.error("Cập nhật tài khoản thất bại!")

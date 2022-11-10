@@ -15,8 +15,13 @@ export const _register = '/register'
 
 
 export const _admin = '/admin'
+
 export const _account = '/account'
 export const _add = '/add'
 export const _edit = '/edit'
+
+export const _group = '/group'
+
+
 
 

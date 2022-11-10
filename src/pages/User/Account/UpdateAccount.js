@@ -3,6 +3,7 @@ import React, { Fragment } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { UpdateAccountAction } from '../../../redux/Actions/ManageUserAction';
 import * as Yup from "yup";
+import { CLIENT } from '../../../utils/util/Role';
 // import { Select } from 'antd';
 
 
@@ -14,16 +15,20 @@ export default function UpdateAccount(props) {
     const { userLogin } = useSelector(state => state.ManageUserReducer);
 
 
-
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: {
             Username: userLogin.account.Username,
+            PasswordOld: '',
             Password: '',
-            Role: 'CLIENT',
+            Role: CLIENT,
             PhoneNumber: userLogin.account.PhoneNumber
         },
         validationSchema: Yup.object({
+            PasswordOld: Yup.string()
+                .min(6, "Tối thiểu 6 kí tự")
+                .required("Không được trống !"),
+
             Password: Yup.string()
                 .min(6, "Tối thiểu 6 kí tự")
                 .required("Không được trống !"),
@@ -37,13 +42,16 @@ export default function UpdateAccount(props) {
 
         }),
         onSubmit: values => {
-            dispatch(UpdateAccountAction(userLogin.account.id, values))
+            if (values.PasswordOld === userLogin.account.Password) {
+                dispatch(UpdateAccountAction(userLogin.account.id, values))
+            }
+            else {
+                alert('Mật khẩu cũ không đúng!')
+            }
         }
     })
 
-    // function changeSelect(value) {
-    //     formik.setFieldValue('Role', value)
-    // }
+
     return (
         <Fragment>
             <div className='grid grid-rows'>
@@ -53,22 +61,17 @@ export default function UpdateAccount(props) {
                     <form onSubmit={formik.handleSubmit}>
                         <div className='mb-2'>Tài khoản:</div>
                         <input type="text" name='Username' value={formik.values.Username} className='p-3 border-gray border rounded-lg focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 w-full' disabled />
-                        <div className='mt-4 mb-2'>Mật khẩu mới:</div>
-                        <input type="text" name='Password' onChange={formik.handleChange} className='p-3 border-gray border rounded-lg focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 w-full' placeholder="Nhập mật khẩu mới..." />
-                        {formik.errors.Password && formik.touched.Password && (
-                            <p className='m-0 mt-1 text-red-600'>{formik.errors.Password}</p>
+                        <div className='mt-4 mb-2'>Mật khẩu cũ:</div>
+                        <input type="text" name='PasswordOld' onChange={formik.handleChange} className='p-3 border-gray border rounded-lg focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 w-full' placeholder="Nhập mật khẩu mới..." />
+                        {formik.errors.PasswordOld && formik.touched.PasswordOld && (
+                            <p className='m-0 mt-1 text-red-600'>{formik.errors.PasswordOld}</p>
                         )}
-                        {/* <div className='mt-4 mb-2'>Nhập lại mật khẩu:</div>
+                        <div className='mt-4 mb-2'>Mật khẩu mới:</div>
                         <input type="text" name='Password' onChange={formik.handleChange} className='p-3 border-gray border rounded-lg focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 w-full' placeholder="Nhập lại mật khẩu..." />
                         {formik.errors.Password && formik.touched.Password && (
                             <p className='m-0 mt-1 text-red-600'>{formik.errors.Password}</p>
-                        )} */}
-                        {/* <div className='mt-4 mb-2'>Phân quyền:</div>
-                        <Select className='w-1/5' placeholder='Chọn phân quyền' value={formik.values.Role} name='Role' onChange={changeSelect}>
-                            {['ADMIN', 'CLIENT'].map(user => {
-                                return <Select.Option value={user}>{user}</Select.Option>
-                            })}
-                        </Select> */}
+                        )}
+
 
                         <div className='mt-4 mb-2'>Số điện thoại:</div>
                         <input type="text" name='PhoneNumber' onChange={formik.handleChange} value={formik.values.PhoneNumber} className='p-3 border-gray border rounded-lg focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 w-full' placeholder="Nhập số điện thoại..." />

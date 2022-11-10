@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react'
 import {
     UserOutlined,
 } from '@ant-design/icons';
-import { FcFilingCabinet } from "react-icons/fc";
+import { BsFlower1 } from "react-icons/bs";
 import { IoBookSharp } from "react-icons/io5";
 import { Layout, Menu, message } from 'antd';
 import { Route } from 'react-router';
@@ -10,6 +10,7 @@ import { NavLink, Redirect } from 'react-router-dom';
 import {
     _account,
     _admin,
+    _group,
     _home,
     _login
 } from '../../utils/util/ConfigPath';
@@ -58,13 +59,13 @@ export default function AdminTemplate(props) {
                         <img src='https://bizweb.dktcdn.net/100/232/638/themes/880685/assets/logo.png?1665539499572' alt='GiftLove' />
                     </div>
                     <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" style={{ backgroundColor: 'transparent' }}>
-                        <Menu.Item key='1' icon={<UserOutlined style={{ fontSize: 20, color: 'gray' }} />}>
+                        <Menu.Item key='1' icon={<UserOutlined style={{ fontSize: 20 }} />}>
                             <NavLink to={`${_admin}${_account}`} >Accounts</NavLink>
                         </Menu.Item>
-                        <Menu.Item key='2' icon={<FcFilingCabinet style={{ fontSize: 20 }} />}>
-                            <NavLink to='/admin/category'>Categories</NavLink>
+                        <Menu.Item key='2' icon={<BsFlower1 style={{ fontSize: 20 }} />}>
+                            <NavLink to={`${_admin}${_group}`}>Group Flower</NavLink>
                         </Menu.Item>
-                        <Menu.Item key='3' icon={<IoBookSharp style={{ fontSize: 20, color: 'gray' }} />}>
+                        <Menu.Item key='3' icon={<IoBookSharp style={{ fontSize: 20 }} />}>
                             <NavLink to='/admin/product'>Flowers</NavLink>
                         </Menu.Item>
                     </Menu>

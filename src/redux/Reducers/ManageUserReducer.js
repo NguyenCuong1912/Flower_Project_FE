@@ -1,4 +1,4 @@
-import { GET_ALL_USER, GET_DETAIL, SET_LOGIN, USER_LOGIN } from "../Types/ManageUserType"
+import { GET_ALL_USER, GET_DETAIL, SET_LOGIN, SET_UPDATE, USER_LOGIN } from "../Types/ManageUserType"
 
 
 let userDefault = {};
@@ -21,6 +21,7 @@ export const ManageUserReducer = (state = initialState, action) => {
             sessionStorage.setItem(USER_LOGIN, JSON.stringify(dataSignIn));
             return { ...state, userLogin: dataSignIn }
         }
+
 
         case GET_ALL_USER: {
             state.lstUser = action.dataUser

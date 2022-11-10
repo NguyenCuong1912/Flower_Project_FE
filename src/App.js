@@ -22,7 +22,8 @@ import {
   _register,
   _edit,
   _add,
-  _order
+  _order,
+  _group
 } from './utils/util/ConfigPath';
 import EditAccount from './pages/Admin/Account/EditAccount';
 import AddAccount from './pages/Admin/Account/AddAccount';
@@ -30,6 +31,9 @@ import AccountTemplate from './templates/AccountTemplate/AccountTemplate';
 import DetailAccount from './pages/User/Account/DetailAccount';
 import OrderAccount from './pages/User/Account/OrderAccount';
 import UpdateAccount from './pages/User/Account/UpdateAccount';
+import ManageGroup from './pages/Admin/GroupFlower/ManageGroup';
+import AddGroupFlower from './pages/Admin/GroupFlower/AddGroupFlower';
+import EditGroupFlower from './pages/Admin/GroupFlower/EditGroupFlower';
 
 
 
@@ -57,6 +61,11 @@ export default function App() {
         <AdminTemplate path={`${_admin}${_account}`} exact Component={ManageAccount} />
         <AdminTemplate path={`${_admin}${_account}${_add}`} exact Component={AddAccount} />
         <AdminTemplate path={`${_admin}${_account}${_edit}/:id`} exact Component={EditAccount} />
+
+        <AdminTemplate path={`${_admin}${_group}`} exact Component={ManageGroup} />
+        <AdminTemplate path={`${_admin}${_group}${_add}`} exact Component={AddGroupFlower} />
+        <AdminTemplate path={`${_admin}${_group}${_edit}/:id`} exact Component={EditGroupFlower} />
+
 
 
 

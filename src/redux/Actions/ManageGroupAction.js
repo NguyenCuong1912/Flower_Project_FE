@@ -61,6 +61,24 @@ export const GetDetailGroupAction = (id) => {
     }
 }
 
+export const UpdateGroupAction = (id, data) => {
+    return async dispatch => {
+        try {
+            const result = await manageGroupService.updateGroup(id, data);
+            if (result.status === 200) {
+                await message.success("Cập nhật loại hoa công!")
+                history.push(`${_admin}${_group}`)
+            }
+            else {
+                message.error("Cập nhật loại hoa thất bại!")
+            }
+        } catch (error) {
+            message.error("Cập nhật loại hoa thất bại!!")
+            console.log('error', error.response?.data)
+
+        }
+    }
+}
 
 export const DeleteGroup = (id) => {
     return async dispatch => {

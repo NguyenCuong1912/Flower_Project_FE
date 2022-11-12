@@ -3,7 +3,7 @@ import {
     UserOutlined,
 } from '@ant-design/icons';
 import { BsFlower1 } from "react-icons/bs";
-import { IoBookSharp } from "react-icons/io5";
+import { FcCloseUpMode } from "react-icons/fc";
 import { Layout, Menu, message } from 'antd';
 import { Route } from 'react-router';
 import { NavLink, Redirect } from 'react-router-dom';
@@ -12,7 +12,8 @@ import {
     _admin,
     _group,
     _home,
-    _login
+    _login,
+    _product
 } from '../../utils/util/ConfigPath';
 import { useSelector } from 'react-redux';
 import _ from 'lodash'
@@ -65,8 +66,8 @@ export default function AdminTemplate(props) {
                         <Menu.Item key='2' icon={<BsFlower1 style={{ fontSize: 20 }} />}>
                             <NavLink to={`${_admin}${_group}`}>Group Flower</NavLink>
                         </Menu.Item>
-                        <Menu.Item key='3' icon={<IoBookSharp style={{ fontSize: 20 }} />}>
-                            <NavLink to='/admin/product'>Flowers</NavLink>
+                        <Menu.Item key='3' icon={<FcCloseUpMode style={{ fontSize: 20 }} />}>
+                            <NavLink to={`${_admin}${_product}`}>Flowers</NavLink>
                         </Menu.Item>
                     </Menu>
                 </Sider>

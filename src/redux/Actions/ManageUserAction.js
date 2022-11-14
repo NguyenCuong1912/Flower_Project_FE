@@ -53,10 +53,10 @@ export const LoginAction = (dataSignIn) => {
 }
 
 
-export const GetListUserAction = () => {
+export const GetListUserAction = (Username = '') => {
     return async dispatch => {
         try {
-            const result = await manageUserService.getAll();
+            const result = await manageUserService.getAll(Username);
             if (result.status === 200) {
                 dispatch({
                     type: GET_ALL_USER,

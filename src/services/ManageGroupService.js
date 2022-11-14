@@ -19,7 +19,9 @@ export class ManageGroupService extends baseService {
     getDetail = (id) => {
         return this.get(`api/GroupFlower/${id}`)
     }
-
+    updateGroup = (id, data) => {
+        return this.put(`api/GroupFlower/${id}`, data)
+    }
     delGroup = (id) => {
         return this.put(`api/GroupFlower/Delete/${id}`)
     }

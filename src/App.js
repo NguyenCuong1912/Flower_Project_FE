@@ -34,6 +34,8 @@ import UpdateAccount from './pages/User/Account/UpdateAccount';
 import ManageGroup from './pages/Admin/GroupFlower/ManageGroup';
 import AddGroupFlower from './pages/Admin/GroupFlower/AddGroupFlower';
 import EditGroupFlower from './pages/Admin/GroupFlower/EditGroupFlower';
+import ManageProduct from './pages/Admin/Product/ManageProduct';
+import AddProduct from './pages/Admin/Product/AddProduct';
 
 
 
@@ -65,6 +67,10 @@ export default function App() {
         <AdminTemplate path={`${_admin}${_group}`} exact Component={ManageGroup} />
         <AdminTemplate path={`${_admin}${_group}${_add}`} exact Component={AddGroupFlower} />
         <AdminTemplate path={`${_admin}${_group}${_edit}/:id`} exact Component={EditGroupFlower} />
+
+        <AdminTemplate path={`${_admin}${_product}`} exact Component={ManageProduct} />
+        <AdminTemplate path={`${_admin}${_product}${_add}`} exact Component={AddProduct} />
+
 
 
 

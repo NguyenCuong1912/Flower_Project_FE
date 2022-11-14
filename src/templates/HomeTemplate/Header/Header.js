@@ -68,12 +68,12 @@ export default function Header(props) {
                 </span>
             </Dropdown>
             : <Fragment>
-                <NavLink to={_login} className='flex py-2 mr-2 text-black hover:text-red-500'>
-                    <AiOutlineLogin className='text-lg my-1 mx-2' />
+                <NavLink to={_login} className='flex p-2 mx-2 text-black border rounded hover:border-red-500 hover:text-red-500'>
+                    {/* <AiOutlineLogin className='text-lg my-1 mx-2' /> */}
                     <span>Đăng nhập</span>
                 </NavLink>
-                <NavLink to={_register} className='flex py-2 text-black hover:text-red-500'>
-                    <AiOutlineForm className='text-lg my-1 mx-2' />
+                <NavLink to={_register} className='flex p-2 text-black border rounded hover:border-red-500 hover:text-red-500'>
+                    {/* <AiOutlineForm className='text-lg my-1 mx-2' /> */}
                     <span>Đăng ký</span>
                 </NavLink>
             </Fragment>}

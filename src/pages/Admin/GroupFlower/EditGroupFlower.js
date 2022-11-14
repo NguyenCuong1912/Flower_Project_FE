@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
 import React, { Fragment, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { GetDetailGroupAction } from './../../../redux/Actions/ManageGroupAction';
+import { GetDetailGroupAction, UpdateGroupAction } from './../../../redux/Actions/ManageGroupAction';
 
 export default function EditGroupFlower(props) {
     let { id } = props.match.params;
@@ -20,8 +20,7 @@ export default function EditGroupFlower(props) {
         },
 
         onSubmit: values => {
-            // dispatch(AddGroupAction(values))
-            console.log({ values })
+            dispatch(UpdateGroupAction(id, values))
         },
     });
     return (

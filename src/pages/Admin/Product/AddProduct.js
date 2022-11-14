@@ -22,24 +22,23 @@ export default function AddProduct(props) {
             Price: '',
             Discount: 0,
             Description: '',
-            ProductImage: {},
+            products: {},
         },
         onSubmit: values => {
             values.Discount *= 1;
 
             let dataFlower = new FormData();
-
+            console.log('a', values.products)
             for (let key in values) {
-                if (key !== 'ProductImage') {
+                if (key !== 'products') {
                     dataFlower.append(key, values[key]);
                 }
                 else {
-                    dataFlower.append('File', values.ProductImage, values.ProductImage.name);
+                    dataFlower.append('products', values.products, values.products.name);
                 }
             }
 
             dispatch(AddProductAction(dataFlower));
-            // console.log('a', values.ProductImage)
 
         }
     })
@@ -51,14 +50,13 @@ export default function AddProduct(props) {
     const handleChangeFile = (e) => {
 
         let file = e.target.files[0]
-
         if (file.type === 'image/jpeg' || file.type === 'image/jpeg' || file.type === 'image/jpg' || file.type === 'image/png') {
             let reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = (e) => {
                 setImg(e.target.result) //Hinh base 64
             }
-            formik.setFieldValue('ProductImage', file)
+            formik.setFieldValue('products', file)
         }
 
     }
@@ -93,7 +91,7 @@ export default function AddProduct(props) {
                             </div>
                             <div className='my-4'>
                                 <span className='mr-2'>Hình ảnh:</span>
-                                <input name='ProductImage' type='file' onChange={handleChangeFile} accept='image/jpeg, image/jpg, image/png' />
+                                <input name='products' type='file' onChange={handleChangeFile} accept='image/jpeg, image/jpg, image/png' />
                             </div>
                             <div className='my-4'>
                                 <img className='w-36 h-36 rounded-md' src={img} alt='...' />

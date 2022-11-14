@@ -16,8 +16,12 @@ export class ManageUserService extends baseService {
         return this.post(`api/Account/SignIn`, dataSignIn)
     }
 
-    getAll = () => {
-        return this.get(`api/Account`)
+    getAll = (Username) => {
+        if (Username) {
+            return this.get(`api/Account?Username=${Username}`)
+        } else {
+            return this.get(`api/Account`)
+        }
     }
 
     getDetail = (id) => {

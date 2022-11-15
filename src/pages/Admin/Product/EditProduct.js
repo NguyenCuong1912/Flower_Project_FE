@@ -52,16 +52,16 @@ export default function EditProduct(props) {
         formik.setFieldValue('GroupFlower_ID', value)
     }
     const [img, setImg] = useState('');
-    const handleChangeFile = (e) => {
+    const handleChangeFile = async (e) => {
 
         let file = e.target.files[0]
         if (file.type === 'image/jpeg' || file.type === 'image/jpeg' || file.type === 'image/jpg' || file.type === 'image/png') {
+            await formik.setFieldValue('products', file)
             let reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = (e) => {
                 setImg(e.target.result) //Hinh base 64
             }
-            formik.setFieldValue('products', file)
         }
 
     }
@@ -97,10 +97,10 @@ export default function EditProduct(props) {
                             </div>
                             <div className='my-4'>
                                 <span className='mr-2'>Hình ảnh:</span>
-                                <input name='products' type='file' onChange={handleChangeFile} accept='image/jpeg, image/jpg, image/png' />
+                                <input type='file' onChange={handleChangeFile} accept='image/jpeg, image/jpg, image/png' />
                             </div>
                             <div className='my-4'>
-                                <img className='w-36 h-36 rounded-md' src={img === '' ? `${DOMAIN}/${detailProduct.ProductImage}` : img} alt='...' />
+                                <img className='w-36 h-36 rounded-md' src={img === '' ? `${DOMAIN}/${detailProduct?.ProductImage}` : img} alt='...' />
                             </div>
                         </div>
                         <div className='col-span-3 ml-4'>

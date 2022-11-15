@@ -66,7 +66,7 @@ export const UpdateGroupAction = (id, data) => {
         try {
             const result = await manageGroupService.updateGroup(id, data);
             if (result.status === 200) {
-                await message.success("Cập nhật loại hoa công!")
+                await message.success("Cập nhật loại hoa thành công!")
                 history.push(`${_admin}${_group}`)
             }
             else {

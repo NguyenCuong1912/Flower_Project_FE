@@ -45,7 +45,6 @@ export const GetDetailProductAction = (id) => {
     return async dispatch => {
         try {
             const result = await manageProductService.getDetail(id);
-            // console.log({ result })
             if (result.status === 200) {
                 dispatch({
                     type: GET_DETAIL_PRODUCT,
@@ -65,15 +64,15 @@ export const GetDetailProductAction = (id) => {
 export const UpdateProductAction = (id, data) => {
     return async dispatch => {
         try {
+
             const result = await manageProductService.updateProduct(id, data);
-            console.log({ result })
-            // if (result.status === 200) {
-            //     await message.success("Cập nhật hoa thành công!")
-            //     history.push(`${_admin}${_product}`)
-            // }
-            // else {
-            //     message.error("Cập nhật hoa thất bại!")
-            // }
+            if (result.status === 200) {
+                await message.success("Cập nhật hoa thành công!")
+                history.push(`${_admin}${_product}`)
+            }
+            else {
+                message.error("Cập nhật hoa thất bại!")
+            }
         } catch (error) {
             message.error("Cập nhật hoa thất bại!!")
             console.log('error', error.response?.data)

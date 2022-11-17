@@ -50,7 +50,7 @@ export default function App() {
       <Switch>
         <HomeTemplate path={ _home } exact Component={ Home } />
         <HomeTemplate path={ _product } exact Component={ Product } />
-        <HomeTemplate path={ _detail } exact Component={ ProductDetail } />
+        <HomeTemplate path={ `${_detail}/:id` } exact Component={ ProductDetail } />
         <HomeTemplate path={ _cart } exact Component={ ShoppingCart } />
         <AccountTemplate path={ _account } exact Component={ DetailAccount } />
         <AccountTemplate path={ `${_account}${_order}` } exact Component={ OrderAccount } />

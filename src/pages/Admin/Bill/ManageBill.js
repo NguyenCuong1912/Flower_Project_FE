@@ -1,35 +1,15 @@
-import React, { Fragment, useEffect } from 'react'
+
+import React, { Fragment } from 'react';
 import { Table, Input } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
-import { history } from '../../../App';
-import {
-    _add,
-    _admin,
-    _product,
-    _edit
-} from '../../../utils/util/ConfigPath';
-import { GetAllProductAction } from '../../../redux/Actions/ManageProductAction';
-import { DOMAIN } from '../../../utils/Settings/config';
-import { DeleteProductAction } from './../../../redux/Actions/ManageProductAction';
-import { GetAllAction } from '../../../redux/Actions/ManageGroupAction';
-
 
 
 const { Search } = Input;
-export default function ManageProduct(props) {
+const ManageBill = (props) => {
     const dispatch = useDispatch();
-
-    const { lstGroup } = useSelector(state => state.ManageGroupReducer);
-
-    const { lstProduct } = useSelector(state => state.ManageProductReducer);
-
-    useEffect(() => {
-        dispatch(GetAllProductAction())
-        dispatch(GetAllAction())
-    }, [])
     const onSearch = (value) => {
-        dispatch(GetAllProductAction(value))
+        console.log(value)
     };
 
     const columns = [
@@ -47,11 +27,11 @@ export default function ManageProduct(props) {
         {
             title: 'Hình ảnh',
             dataIndex: 'ProductImage',
-            render: (text, item) => {
-                return <Fragment>
-                    <img className='h-36 w-36' src={ `${DOMAIN}/${item.ProductImage}` } alt='' />
-                </Fragment>
-            },
+            // render: (text, item) => {
+            //     return <Fragment>
+            //         <img className='h-36 w-36' src={ `${DOMAIN}/${item.ProductImage}` } alt='' />
+            //     </Fragment>
+            // },
             width: '12%'
 
         },
@@ -59,11 +39,11 @@ export default function ManageProduct(props) {
             title: 'Loại hoa',
             dataIndex: 'GroupFlower_ID',
             render: (text, item) => {
-                return <Fragment>
-                    { lstGroup.map((lst, index) => {
-                        return <span key={ index }>{ lst.id === item.GroupFlower_ID ? <span>{ lst.GroupName }</span> : '' }</span>
-                    }) }
-                </Fragment>
+                // return <Fragment>
+                //     { lstGroup.map((lst, index) => {
+                //         return <span key={ index }>{ lst.id === item.GroupFlower_ID ? <span>{ lst.GroupName }</span> : '' }</span>
+                //     }) }
+                // </Fragment>
             },
             width: '10%'
 
@@ -91,12 +71,12 @@ export default function ManageProduct(props) {
             render: (text, item) => {
                 return <div className='flex'>
                     <button className='mx-4 text-green-500 hover:text-green-900' title='Sửa' onClick={ () => {
-                        history.push(`${_admin}${_product}${_edit}/${item.id}`)
+                        // history.push(`${_admin}${_product}${_edit}/${item.id}`)
                     } }>
                         <EditOutlined style={ { fontSize: 25 } } />
                     </button>
                     <button className='mx-4 text-red-500 hover:text-red-900' title='Xóa' onClick={ () => {
-                        dispatch(DeleteProductAction(item.id))
+                        // dispatch(DeleteProductAction(item.id))
                     } }>
                         <DeleteOutlined style={ { fontSize: 25 } } />
                     </button>
@@ -106,20 +86,23 @@ export default function ManageProduct(props) {
 
         },
     ]
+
     return (
         <Fragment>
             <div className='mt-4'>
                 <h2 className='text-4xl font-bold text-center text-red-500'>Quản lý hoa</h2>
                 <div className='my-10 flex justify-between'>
                     <button type='button' className='border-2 border-blue-900 rounded w-24 h-10 text-lg font-bold text-red-500 hover:text-white hover:bg-red-600' onClick={ () => {
-                        history.push(`${_admin}${_product}${_add}`)
+                        // history.push(`${_admin}${_product}${_add}`)
                     } }>Thêm </button>
                     <div className='w-1/3'>
                         <Search size='large' placeholder="Bạn muốn tìm gì?..." onSearch={ onSearch } enterButton />
                     </div>
                 </div>
-                <Table dataSource={ lstProduct } columns={ columns } rowKey='id' />;
+                <Table columns={ columns } rowKey='id' />;
             </div>
         </Fragment>
-    )
+    );
 }
+
+export default ManageBill;

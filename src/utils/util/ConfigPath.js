@@ -22,6 +22,6 @@ export const _edit = '/edit'
 
 export const _group = '/group'
 
-
+export const _bill = '/bill'
 
 

@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+
 import { Dropdown, Space } from 'antd';
 import { NavLink } from 'react-router-dom';
 import {
@@ -6,9 +7,17 @@ import {
     AiOutlineShopping
 } from "react-icons/ai";
 import { _cart } from '../../../utils/util/ConfigPath';
+import { useSelector } from 'react-redux';
 
 
 export default function NavHeader(props) {
+    const { cart } = useSelector(state => state.ManageCartReducer)
+    console.log(cart)
+    let numberOrder = 0;
+    cart?.forEach(element => {
+        numberOrder += element.Quantity
+        console.log(element)
+    });
     const items = [
         {
             label: (
@@ -59,11 +68,11 @@ export default function NavHeader(props) {
                         <div className='col-span-4 flex'>
                             <div className='my-3 border-r pr-4'>
                                 <Dropdown
-                                    menu={{
+                                    menu={ {
                                         items,
-                                    }}
+                                    } }
                                 >
-                                    <NavLink to='' onClick={(e) => e.preventDefault()}>
+                                    <NavLink to='' onClick={ (e) => e.preventDefault() }>
                                         <Space>
                                             <span className='flex text-lg font-medium font-serif text-black hover:text-red-500 '>
                                                 Sản phẩm
@@ -79,10 +88,10 @@ export default function NavHeader(props) {
                             <NavLink to='' className='my-3 px-4 text-lg text-black font-medium font-serif hover:text-red-500'>Liên hệ</NavLink>
                         </div>
                         <div className='w-full'>
-                            <NavLink to={_cart} className='my-3 flex justify-end text-lg text-black font-medium font-serif hover:text-red-500'>
+                            <NavLink to={ _cart } className='my-3 flex justify-end text-lg text-black font-medium font-serif hover:text-red-500'>
                                 <AiOutlineShopping className='mt-1 mr-2' />
                                 Giỏ hàng
-                                <span className='text-red-500 ml-1'>(0)</span>
+                                <span className='text-red-500 ml-1'>({ numberOrder })</span>
                             </NavLink>
                         </div>
                     </div>

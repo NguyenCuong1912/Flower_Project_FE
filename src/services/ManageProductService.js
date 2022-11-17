@@ -11,8 +11,14 @@ export class ManageProductService extends baseService {
         return this.post(`api/Product`, dataProduct)
     }
 
-    getAll = () => {
-        return this.get(`api/Product`)
+    getAll = (name) => {
+        if (name) {
+            console.log("aaa")
+            return this.get(`api/Product?name=${name}`)
+        } else {
+            console.log("bb")
+            return this.get(`api/Product`)
+        }
     }
 
     getDetail = (id) => {

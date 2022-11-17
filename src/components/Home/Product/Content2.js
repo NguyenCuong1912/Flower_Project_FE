@@ -1,9 +1,26 @@
-import React, { Fragment, useRef } from 'react'
+import React, { Fragment, useEffect, useRef } from 'react'
 import Slider from "react-slick";
-import { Rate } from 'antd';
+import _ from 'lodash'
 import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/ai";
 import { NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { GetAllProductAction, GetDetailProductAction } from '../../../redux/Actions/ManageProductAction';
+import { DOMAIN } from '../../../utils/Settings/config';
+import { _cart, _detail } from '../../../utils/util/ConfigPath';
+import { history } from '../../../App';
+
+
 export default function Content2(props) {
+
+    const dispatch = useDispatch();
+
+    const { lstProduct } = useSelector(state => state.ManageProductReducer);
+    useEffect(() => {
+        dispatch(GetAllProductAction());
+    }, [])
+
+
+
     const ref = useRef({});
 
     const next = () => {
@@ -35,95 +52,30 @@ export default function Content2(props) {
                 </div>
                 <div className='col-span-10'>
                     <Slider ref={ref} {...settings}>
-                        <div className='px-2'>
-                            <div className="h-full pb-2 border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
-                                <img className="h-full object-cover object-center" src="img/product/giamgia/cozy.png" alt="1" />
-                                <div className='text-center'>
-                                    <h3 className="title-font text-lg font-medium text-gray-900 mb-3">Cozy</h3>
-                                    <Rate style={{ fontSize: 14 }} allowHalf defaultValue={2.5} />
-
-                                    <div className='flex justify-around my-2'>
-                                        <span className='text-red-500 font-bold'>100.000 đ</span>
-                                        <span className='text-gray-500 font-bold line-through'>150.000 đ</span>
-                                    </div>
-                                    <NavLink to=''>
-                                        <button type='button' className='px-6 py-2 text-red-600 font-bold border border-red-600 rounded hover:text-white hover:bg-red-600'>Đặt hàng</button>
+                        {lstProduct.map((item, index) => {
+                            return <div key={index} className='px-2'>
+                                <div className="h-full pb-2 border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                                    <NavLink to={`${_detail}/${item.id}`}>
+                                        <img className="h-full object-cover object-center" src={`${DOMAIN}/${item.ProductImage}`} alt={item.ProductName} title={item.ProductName} />
                                     </NavLink>
+
+                                    <div className='text-center'>
+                                        <h3 className="title-font text-lg font-medium text-gray-900 mb-3">{_.truncate(item.ProductName, { 'length': 20, 'separator': '' })}</h3>
+
+
+                                        <div className='flex justify-around my-2'>
+                                            <span className='text-red-500 font-bold'>{(item.Price - item.Price * item.Discount * 0.01).toLocaleString()} đ</span>
+                                            <span className='text-gray-500 font-bold line-through'>{(item.Price * 1).toLocaleString()} đ</span>
+                                        </div>
+                                        <button type='button' onClick={() => {
+                                            dispatch(GetDetailProductAction(item.id))
+                                            history.push(`${_cart}`)
+                                        }} className='px-6 py-2 text-red-600 font-bold border border-red-600 rounded hover:text-white hover:bg-red-600'>Đặt hàng</button>
+
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div className='px-2'>
-                            <div className="h-full pb-2 border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
-                                <img className="h-full object-cover object-center" src="img/product/giamgia/CucTanaXinh.png" alt="1" />
-                                <div className='text-center'>
-                                    <h3 className="title-font text-lg font-medium text-gray-900 mb-3">Hạ Về</h3>
-                                    <Rate style={{ fontSize: 14 }} allowHalf defaultValue={2.5} />
-
-                                    <div className='flex justify-around my-2'>
-                                        <span className='text-red-500 font-bold'>100.000 đ</span>
-                                        <span className='text-gray-500 font-bold line-through'>150.000 đ</span>
-                                    </div>
-                                    <NavLink to=''>
-                                        <button type='button' className='px-6 py-2 text-red-600 font-bold border border-red-600 rounded hover:text-white hover:bg-red-600'>Đặt hàng</button>
-                                    </NavLink>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className='px-2'>
-                            <div className="h-full pb-2 border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
-                                <img className="h-full object-cover object-center" src="img/product/giamgia/littleTana.png" alt="1" />
-                                <div className='text-center'>
-                                    <h3 className="title-font text-lg font-medium text-gray-900 mb-3">Little Tana</h3>
-                                    <Rate style={{ fontSize: 14 }} allowHalf defaultValue={2.5} />
-
-                                    <div className='flex justify-around my-2'>
-                                        <span className='text-red-500 font-bold'>100.000 đ</span>
-                                        <span className='text-gray-500 font-bold line-through'>150.000 đ</span>
-                                    </div>
-                                    <NavLink to=''>
-                                        <button type='button' className='px-6 py-2 text-red-600 font-bold border border-red-600 rounded hover:text-white hover:bg-red-600'>Đặt hàng</button>
-                                    </NavLink>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className='px-2'>
-                            <div className="h-full pb-2 border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
-                                <img className="h-full object-cover object-center" src="img/product/giamgia/motTinhYeu.png" alt="1" />
-                                <div className='text-center'>
-                                    <h3 className="title-font text-lg font-medium text-gray-900 mb-3">Một Tình Yêu</h3>
-                                    <Rate style={{ fontSize: 14 }} allowHalf defaultValue={2.5} />
-
-                                    <div className='flex justify-around my-2'>
-                                        <span className='text-red-500 font-bold'>100.000 đ</span>
-                                        <span className='text-gray-500 font-bold line-through'>150.000 đ</span>
-                                    </div>
-                                    <NavLink to=''>
-                                        <button type='button' className='px-6 py-2 text-red-600 font-bold border border-red-600 rounded hover:text-white hover:bg-red-600'>Đặt hàng</button>
-                                    </NavLink>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className='px-2'>
-                            <div className="h-full pb-2 border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
-                                <img className="h-full object-cover object-center" src="img/product/giamgia/rustic.png" alt="1" />
-                                <div className='text-center'>
-                                    <h3 className="title-font text-lg font-medium text-gray-900 mb-3">Rustic</h3>
-                                    <Rate style={{ fontSize: 14 }} allowHalf defaultValue={2.5} />
-
-                                    <div className='flex justify-around my-2'>
-                                        <span className='text-red-500 font-bold'>100.000 đ</span>
-                                        <span className='text-gray-500 font-bold line-through'>150.000 đ</span>
-                                    </div>
-                                    <NavLink to=''>
-                                        <button type='button' className='px-6 py-2 text-red-600 font-bold border border-red-600 rounded hover:text-white hover:bg-red-600'>Đặt hàng</button>
-                                    </NavLink>
-                                </div>
-                            </div>
-                        </div>
+                        })}
 
 
                     </Slider>

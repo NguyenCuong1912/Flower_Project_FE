@@ -59,10 +59,6 @@ export default function Product(props) {
 
                     <div className='flex flex-wrap ml-12 mt-8'>
                         <ProductOne />
-                        <ProductOne />
-                        <ProductOne />
-                        <ProductOne />
-                        <ProductOne />
                     </div>
 
 

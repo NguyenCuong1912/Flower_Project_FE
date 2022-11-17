@@ -5,6 +5,9 @@ import {
     AiFillCaretRight,
     AiOutlineShopping
 } from "react-icons/ai";
+import { _cart } from '../../../utils/util/ConfigPath';
+
+
 export default function NavHeader(props) {
     const items = [
         {
@@ -76,7 +79,7 @@ export default function NavHeader(props) {
                             <NavLink to='' className='my-3 px-4 text-lg text-black font-medium font-serif hover:text-red-500'>Liên hệ</NavLink>
                         </div>
                         <div className='w-full'>
-                            <NavLink to='' className='my-3 flex justify-end text-lg text-black font-medium font-serif hover:text-red-500'>
+                            <NavLink to={_cart} className='my-3 flex justify-end text-lg text-black font-medium font-serif hover:text-red-500'>
                                 <AiOutlineShopping className='mt-1 mr-2' />
                                 Giỏ hàng
                                 <span className='text-red-500 ml-1'>(0)</span>

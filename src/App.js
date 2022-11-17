@@ -36,6 +36,7 @@ import AddGroupFlower from './pages/Admin/GroupFlower/AddGroupFlower';
 import EditGroupFlower from './pages/Admin/GroupFlower/EditGroupFlower';
 import ManageProduct from './pages/Admin/Product/ManageProduct';
 import AddProduct from './pages/Admin/Product/AddProduct';
+import EditProduct from './pages/Admin/Product/EditProduct';
 
 
 
@@ -47,7 +48,7 @@ export default function App() {
       <Switch>
         <HomeTemplate path={_home} exact Component={Home} />
         <HomeTemplate path={_product} exact Component={Product} />
-        <HomeTemplate path={_detail} exact Component={ProductDetail} />
+        <HomeTemplate path={`${_detail}/:id`} exact Component={ProductDetail} />
         <HomeTemplate path={_cart} exact Component={ShoppingCart} />
         <AccountTemplate path={_account} exact Component={DetailAccount} />
         <AccountTemplate path={`${_account}${_order}`} exact Component={OrderAccount} />
@@ -70,6 +71,8 @@ export default function App() {
 
         <AdminTemplate path={`${_admin}${_product}`} exact Component={ManageProduct} />
         <AdminTemplate path={`${_admin}${_product}${_add}`} exact Component={AddProduct} />
+        <AdminTemplate path={`${_admin}${_product}${_edit}/:id`} exact Component={EditProduct} />
+
 
 
 

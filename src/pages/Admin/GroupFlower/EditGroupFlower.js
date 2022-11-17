@@ -8,7 +8,6 @@ export default function EditGroupFlower(props) {
     const dispatch = useDispatch();
 
     const { detailGroup } = useSelector(state => state.ManageGroupReducer);
-    console.log({ detailGroup })
 
     useEffect(() => {
         dispatch(GetDetailGroupAction(id))

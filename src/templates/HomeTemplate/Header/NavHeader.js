@@ -12,11 +12,9 @@ import { useSelector } from 'react-redux';
 
 export default function NavHeader(props) {
     const { cart } = useSelector(state => state.ManageCartReducer)
-    console.log(cart)
     let numberOrder = 0;
     cart?.forEach(element => {
         numberOrder += element.Quantity
-        console.log(element)
     });
     const items = [
         {

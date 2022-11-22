@@ -7,6 +7,7 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import { DOMAIN } from '../../utils/Settings/config';
 import { DELETE_CART, UPDATE_CART } from '../../redux/Types/ManageCartType';
+import { CheckoutAction } from './../../redux/Actions/CheckoutAction';
 
 const { TextArea } = Input;
 
@@ -14,6 +15,10 @@ export default function ShoppingCart(props) {
     const dispatch = useDispatch();
 
     const { cart } = useSelector(state => state.ManageCartReducer)
+    let total = 0;
+    cart?.forEach(item => {
+        total += (item.Price - (item.Price * (item.Discount / 100))) * item.Quantity
+    });
     console.log(cart)
     //     useEffect(()=>{
     // dispatch(GetDetailProductAction)
@@ -67,7 +72,7 @@ export default function ShoppingCart(props) {
                     </div>
                 </th>
                 <th className='text-xl'>
-                    { (item.Price - (item.Price * (item.Discount / 100))) * item.Quantity }đ
+                    { ((item.Price - (item.Price * (item.Discount / 100))) * item.Quantity).toLocaleString() }đ
                 </th>
             </tr>
         })
@@ -100,14 +105,13 @@ export default function ShoppingCart(props) {
                     <div className='border-t-2 mt-16'>
                         <div className='grid grid-cols-12 pt-6'>
                             <div className='col-span-8'>
-                                <span>Ghi chú</span>
-                                <TextArea rows={ 4 } />
                             </div>
                             <div className='col-span-4 text-end'>
-                                <div>Tạm tính <span className='text-2xl font-medium text-red-600 mx-2'>225.000 đ</span></div>
+                                <div>Tạm tính <span className='text-2xl font-medium text-red-600 mx-2'>{ total.toLocaleString() } đ</span></div>
                                 <div>
-                                    <button type='button' className='border bg-red-500 text-white py-2 px-4 font-medium rounded hover:bg-red-700'>Cập nhật</button>
-                                    <button type='button' className='border bg-red-500 text-white py-2 px-4 font-medium rounded hover:bg-red-700'>Thanh toán</button>
+                                    <button type='button' onClick={ () => {
+                                        dispatch(CheckoutAction(cart))
+                                    } } className='border bg-red-500 text-white py-2 px-4 font-medium rounded hover:bg-red-700'>Thanh toán</button>
                                 </div>
                             </div>
                         </div>

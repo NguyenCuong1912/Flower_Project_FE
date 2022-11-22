@@ -1,4 +1,4 @@
-import { ADD_CART, DELETE_CART, UPDATE_CART } from './../Types/ManageCartType';
+import { ADD_CART, CLEAR_CART, DELETE_CART, UPDATE_CART } from './../Types/ManageCartType';
 
 const initialState = {
     cart: [
@@ -60,6 +60,8 @@ export default (state = initialState, { type, data }) => {
             }
             return { ...state, cart: deleteCart }
         }
+        case CLEAR_CART:
+            return { ...state, cart: [] }
         default:
             return state
     }

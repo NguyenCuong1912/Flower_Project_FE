@@ -1,21 +1,18 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import ImageLensZoom from 'react-lens-zoom';
-import { Rate, Tabs } from 'antd';
-import { history } from './../../App';
-import { _cart } from '../../utils/util/ConfigPath';
 import {
     AiOutlineShoppingCart,
     AiFillLike,
     AiOutlineMinus,
     AiOutlinePlus,
     AiOutlineShareAlt,
-    AiFillWechat,
-    AiFillEdit
 } from 'react-icons/ai';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { GetDetailProductAction } from './../../redux/Actions/ManageProductAction';
 import { DOMAIN } from './../../utils/Settings/config';
+import { ADD_CART } from '../../redux/Types/ManageCartType';
+import { message } from 'antd';
 
 
 
@@ -25,10 +22,13 @@ export default function ProductDetail(props) {
     const dispatch = useDispatch()
 
     const { detailProduct } = useSelector(state => state.ManageProductReducer);
-    console.log({ detailProduct })
+    const [number, setNumber] = useState(1);
+
     useEffect(() => {
         dispatch(GetDetailProductAction(id))
     }, [])
+
+
 
     return (
         <Fragment>
@@ -59,19 +59,33 @@ export default function ProductDetail(props) {
 
                             <div>
                                 <span className='font-bold'>Số lượng</span>
-                                <div className='flex h-10 mt-2'>
-                                    <button type='button' className='border-2 text-lg px-1 hover:text-red-500 hover:border-red-500'><AiOutlineMinus /></button>
-                                    <input type="text" name="number" class=" px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-red-500 focus:ring-red-500 block w-1/4 sm:text-sm focus:ring-1" />
-                                    <button type='button' className='border-2 text-lg px-1 hover:text-red-500 hover:border-red-500'><AiOutlinePlus /></button>
+                                <div className='h-10 flex'>
+                                    <button id='decrease' type='button' onClick={() => {
+
+                                        if (number <= 1) {
+                                            setNumber(1)
+                                        } else {
+                                            setNumber(number - 1)
+                                        }
+
+
+                                    }} className='border-2 text-lg px-1 hover:text-red-500 hover:border-red-500'><AiOutlineMinus /></button>
+                                    <input type="text" disabled id='soluong' value={number} name="number" className="text-center w-1/12 p-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-red-500 focus:ring-red-500 block sm:text-sm focus:ring-1" />
+                                    <button type='button' onClick={() => {
+                                        setNumber(number + 1)
+                                    }} className='border-2 text-lg px-1 hover:text-red-500 hover:border-red-500'><AiOutlinePlus /></button>
                                 </div>
                                 <div className='my-4'>
                                     <button type='button' onClick={() => {
-                                        history.push(`${_cart}`)
+                                        dispatch({
+                                            type: ADD_CART,
+                                            data: {
+                                                item: detailProduct, number
+                                            }
+                                        })
+                                        message.success('Sản phẩm đã được thêm vào giỏ hàng')
                                     }} className='flex border-2 p-2 text-white bg-red-500 rounded-md text-xl hover:bg-red-700'>Thêm vào giỏ hàng <AiOutlineShoppingCart className='mt-2 mx-2 mb-1' /></button>
                                 </div>
-                                {/* <div>
-                                    <button type='button' className='flex border-2 p-2 text-white bg-red-500 rounded-md text-xl hover:bg-red-700'>Mua ngay</button>
-                                </div> */}
                                 <div className='mt-2 flex'>
                                     <button type='button' className='flex border-2 px-2 text-white bg-blue-500 rounded-md hover:bg-blue-700'><AiFillLike className='mx-1 mt-1' />Thích</button>
                                     <button type='button' className='flex border-2 px-2 text-white bg-blue-500 rounded-md hover:bg-blue-700'><AiOutlineShareAlt className='mx-1 mt-1' />Chia sẻ</button>
@@ -91,45 +105,14 @@ export default function ProductDetail(props) {
                         <span className='text-base'>
                             {detailProduct.Description}
                         </span>
-                        {/* <div className='my-4'>
-                            <h3>Bó hoa Cozy bao gồm</h3>
-                            <ul className='list-disc text-base ml-8'>
-                                <li>3 cành hướng dương</li>
-                                <li>Hoa cẩm chướng</li>
-                                <li>Lá phụ trang trí</li>
-                            </ul>
-                        </div> */}
+
                         <div className='flex justify-center my-8'>
                             <img className='w-2/3' src={`${DOMAIN}/${detailProduct.ProductImage}`} alt={detailProduct.ProductName} />
 
                         </div>
                     </div>
 
-                    {/* <div className='border-2'>
-                        <div className='p-4 flex justify-between'>
-                            <div>
-                                <h3 className='text-3xl'>Đánh giá sản phẩm</h3>
-                                <div className='text-center'>
-                                    <Rate style={{ fontSize: 14 }} />
-                                    <div>
-                                        Dựa trên 0 đánh giá
-                                    </div>
-                                </div>
-                            </div>
-                            <div className='flex mt-8'>
-                                <button type='button' className='flex border-2 border-red-500 h-14 p-4 rounded text-red-500 text-base mr-2 hover:border-red-700'><AiFillWechat className='text-2xl mr-1' />Viết đánh giá</button>
-                                <button type='button' className='flex border-2 border-red-500 h-14 p-4 rounded text-red-500 text-base hover:border-red-700'><AiFillEdit className='text-2xl mr-1' />Đặt câu trả lời</button>
-                            </div>
-                        </div>
-                        <div className='mx-4'>
-                            <Tabs defaultActiveKey="1" >
-                                <Tabs.TabPane tab="Đánh giá" key="1">
-                                </Tabs.TabPane>
-                                <Tabs.TabPane tab="Câu hỏi & trả lời:" key="2">
-                                </Tabs.TabPane>
-                            </Tabs>
-                        </div>
-                    </div> */}
+
 
                 </div>
             </div>

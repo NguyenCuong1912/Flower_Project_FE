@@ -12,6 +12,8 @@ import {
     FaFacebookMessenger
 } from "react-icons/fa";
 import Contact from './Contact';
+import { _footer } from '../../../utils/util/ConfigPath';
+
 export default function Footer(props) {
     return (
         <Fragment>
@@ -25,7 +27,7 @@ export default function Footer(props) {
                     <div className="flex flex-wrap md:text-left text-center order-first">
                         <div className="lg:w-1/3 md:w-1/2 w-full px-4">
                             <NavLink to='' className="flex title-font font-medium items-center md:justify-start justify-center">
-                                <img src='img/logo_footer.png' alt='GiftLove' />
+                                <img src='../img/logo_footer.png' alt='GiftLove' />
                             </NavLink>
                             <nav className="list-none mt-4">
                                 <div>Được thành lập vào ngày 06/11/2022
@@ -79,7 +81,7 @@ export default function Footer(props) {
                 <div className="bg-gray-400">
                     <div className="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col">
                         <NavLink to='' className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
-                            <img src='img/logo_footer.png' alt='GiftLove' />
+                            <img src={`${_footer}`} alt='GiftLove' />
                         </NavLink>
                         <div className='-mt-20'>
                             <img src='img/people_footer.png' alt='people' />

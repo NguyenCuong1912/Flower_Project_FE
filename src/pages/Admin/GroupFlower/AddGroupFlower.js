@@ -2,6 +2,9 @@ import React, { Fragment } from 'react'
 import { useFormik } from 'formik'
 import { useDispatch } from 'react-redux';
 import { AddGroupAction } from './../../../redux/Actions/ManageGroupAction';
+import { history } from '../../../App';
+import { _admin, _group } from '../../../utils/util/ConfigPath';
+import { AiOutlineRollback } from 'react-icons/ai';
 
 export default function AddGroupFlower(props) {
     const dispatch = useDispatch();
@@ -18,6 +21,13 @@ export default function AddGroupFlower(props) {
     return (
         <Fragment>
             <div className='grid grid-cols-7'>
+                <div>
+                    <button type='button' title='Trở về trang loại hoa' className='text-2xl py-2 px-5 border-2 border-red-500 rounded-md text-red-500 hover:bg-red-500 hover:text-white' onClick={() => {
+                        history.push(`${_admin}${_group}`)
+                    }}>
+                        <AiOutlineRollback />
+                    </button>
+                </div>
                 <div className='col-span-3 col-start-3 mt-32 h-72 rounded-lg shadow-2xl bg-white p-4'>
                     <h1 className='text-center text-4xl font-bold text-red-500'>Thêm loại hoa</h1>
                     <div className='p-4'>

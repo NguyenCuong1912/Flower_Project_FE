@@ -6,6 +6,10 @@ import { useFormik } from 'formik'
 import * as Yup from "yup";
 import { useDispatch } from 'react-redux';
 import { AddUserAction } from '../../../redux/Actions/ManageUserAction';
+import { AiOutlineRollback } from 'react-icons/ai';
+import { history } from '../../../App';
+import { _admin, _account } from '../../../utils/util/ConfigPath';
+
 export default function AddAccount(props) {
 
     const dispatch = useDispatch();
@@ -48,6 +52,13 @@ export default function AddAccount(props) {
     return (
         <Fragment>
             <div className='grid grid-cols-7'>
+                <div>
+                    <button type='button' title='Trở về trang tài khoản' className='text-2xl py-2 px-5 border-2 border-red-500 rounded-md text-red-500 hover:bg-red-500 hover:text-white' onClick={() => {
+                        history.push(`${_admin}${_account}`)
+                    }}>
+                        <AiOutlineRollback />
+                    </button>
+                </div>
                 <div className='col-span-3 col-start-3 mt-16 h-full rounded-lg shadow-2xl bg-white p-4'>
                     <h1 className='mt-8 text-center text-4xl font-bold text-red-500'>Thêm tài khoản</h1>
                     <div className='p-4'>

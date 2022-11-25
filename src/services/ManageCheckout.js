@@ -10,5 +10,14 @@ class CheckoutServices extends baseService {
     checkout = (data) => {
         return this.post('api/Checkout', data)
     }
+
+    getCheckout = () => {
+        return this.get(`api/Checkout`)
+    }
+
+    getCheckoutDetail = (id) => {
+        return this.get(`api/Checkout/Detail/${id}`)
+    }
+
 }
 export const checkoutServices = new CheckoutServices();

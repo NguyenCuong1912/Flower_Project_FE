@@ -26,9 +26,7 @@ export const GetAllProductAction = (name = '') => {
     return async dispatch => {
         try {
             const result = await manageProductService.getAll(name);
-            console.log("result", result)
             if (result.status === 200) {
-                console.log(result.data)
                 dispatch({
                     type: GET_ALL_PRODUCT,
                     dataProduct: result.data

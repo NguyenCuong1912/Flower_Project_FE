@@ -25,3 +25,12 @@ export const _group = '/group'
 export const _bill = '/bill'
 
 
+
+export const _src = '../img/background_title.png'
+export const _name = 'background_title'
+export const _header = '../img/logo.png'
+export const _footer = '../img/logo_footer.png'
+
+
+
+

@@ -1,63 +1,51 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 
-import { Dropdown, Space } from 'antd';
+import { Dropdown, Menu, Space } from 'antd';
 import { NavLink } from 'react-router-dom';
 import {
     AiFillCaretRight,
     AiOutlineShopping
 } from "react-icons/ai";
-import { _cart } from '../../../utils/util/ConfigPath';
-import { useSelector } from 'react-redux';
+import { _cart, _product } from '../../../utils/util/ConfigPath';
+import { useSelector, useDispatch } from 'react-redux';
+import { GetAllAction } from '../../../redux/Actions/ManageGroupAction';
+import { history } from '../../../App';
 
 
 export default function NavHeader(props) {
+    const dispatch = useDispatch();
+
     const { cart } = useSelector(state => state.ManageCartReducer)
+
+    const { lstGroup } = useSelector(state => state.ManageGroupReducer)
+
+    useEffect(() => {
+        dispatch(GetAllAction())
+    }, [])
+
     let numberOrder = 0;
     cart?.forEach(element => {
         numberOrder += element.Quantity
     });
-    const items = [
-        {
-            label: (
-                <NavLink to='' className='pr-20 text-base'>
-                    Hoa sinh nhật
-                </NavLink>
-            ),
-            key: '0',
-        },
-        {
-            label: (
-                <NavLink to='' className='text-base'>
-                    Hoa cưới
-                </NavLink>
-            ),
-            key: '1',
-        },
-        {
-            label: (
-                <NavLink to='' className='text-base'>
-                    Hoa tình yêu
-                </NavLink>
-            ),
-            key: '2',
-        },
-        {
-            label: (
-                <NavLink to='' className='text-base'>
-                    Hoa khai trương
-                </NavLink>
-            ),
-            key: '3',
-        },
-        {
-            label: (
-                <NavLink to='' className='text-base'>
-                    Hoa tặng mẹ
-                </NavLink>
-            ),
-            key: '4',
-        },
-    ];
+
+
+
+
+    const menu = (
+        <Menu>
+            {lstGroup?.map((group, index) => {
+                return <Fragment key={index}>
+                    <Menu.Item key={group.id}>
+                        <div onClick={() => {
+                            history.push(`${_product}/${group.id}`)
+                        }} className='pr-20 text-base'>{group.GroupName}</div>
+                    </Menu.Item>
+                </Fragment>
+            })}
+        </Menu>
+
+    );
+
     return (
         <Fragment>
             <div className='grid grid-cols-5'>
@@ -65,12 +53,8 @@ export default function NavHeader(props) {
                     <div className='grid grid-cols-5'>
                         <div className='col-span-4 flex'>
                             <div className='my-3 border-r pr-4'>
-                                <Dropdown
-                                    menu={ {
-                                        items,
-                                    } }
-                                >
-                                    <NavLink to='' onClick={ (e) => e.preventDefault() }>
+                                <Dropdown overlay={menu}>
+                                    <NavLink to='' onClick={(e) => e.preventDefault()}>
                                         <Space>
                                             <span className='flex text-lg font-medium font-serif text-black hover:text-red-500 '>
                                                 Sản phẩm
@@ -86,10 +70,10 @@ export default function NavHeader(props) {
                             <NavLink to='' className='my-3 px-4 text-lg text-black font-medium font-serif hover:text-red-500'>Liên hệ</NavLink>
                         </div>
                         <div className='w-full'>
-                            <NavLink to={ _cart } className='my-3 flex justify-end text-lg text-black font-medium font-serif hover:text-red-500'>
+                            <NavLink to={_cart} className='my-3 flex justify-end text-lg text-black font-medium font-serif hover:text-red-500'>
                                 <AiOutlineShopping className='mt-1 mr-2' />
                                 Giỏ hàng
-                                <span className='text-red-500 ml-1'>({ numberOrder })</span>
+                                <span className='text-red-500 ml-1'>({numberOrder})</span>
                             </NavLink>
                         </div>
                     </div>

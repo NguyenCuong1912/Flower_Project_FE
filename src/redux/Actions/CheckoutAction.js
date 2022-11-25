@@ -40,13 +40,15 @@ export const CheckoutAction = (data) => {
 
 export const GetListCheckout = () => {
     return async dispatch => {
+        const id = JSON.parse(sessionStorage.getItem("USER_LOGIN")).account.id;
         try {
-            const result = await checkoutServices.getCheckout();
+            const result = await checkoutServices.getCheckout(id);
             if (result.status === 200) {
                 dispatch({
                     type: GET_LIST_CART,
                     data: result.data,
                 })
+                console.log("ggg00", result.data)
             }
         } catch (error) {
             console.log('error', error.response?.data)

@@ -12,7 +12,7 @@ const initialState = {
         //     Quantity: 2,
         // }
     ],
-    lstCart: [],
+    cartHistory: [],
     lstCheckoutDetail: []
 }
 
@@ -67,7 +67,7 @@ export const ManageCartReducer = (state = initialState, { type, data }) => {
             return { ...state, cart: [] }
 
         case GET_LIST_CART: {
-            state.lstCart = data
+            state.cartHistory = data
             return { ...state }
         }
         case GET_CHECKOUT_DETAIL: {

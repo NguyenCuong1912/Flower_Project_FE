@@ -11,7 +11,7 @@ export default function Home() {
             <BannerSlick />
             <div className='grid grid-cols-5'>
                 <div className='col-start-2 col-span-3'>
-                    <NavbarIcon />
+                    {/* <NavbarIcon /> */}
                     <Content1 />
                     <Content2 />
                     <Content3 />

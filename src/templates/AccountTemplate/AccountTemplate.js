@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from 'react'
 import { useSelector } from 'react-redux';
 import { Route } from 'react-router';
 import { NavLink } from 'react-router-dom';
-import { _account, _edit, _order } from '../../utils/util/ConfigPath';
+import { _account, _edit } from '../../utils/util/ConfigPath';
 import Footer from '../HomeTemplate/Footer/Footer';
 import Header from '../HomeTemplate/Header/Header';
 
@@ -25,9 +25,6 @@ export default function AccountTemplate(props) {
                             <div className='font-bold text-lg'>Xin chào!, {userLogin.account.Username}</div>
                             <div className='mt-4'>
                                 <NavLink to={_account} className='text-black text-base mt-4 mb-2 hover:text-red-500 hover:underline'>Thông tin tài khoản</NavLink>
-                            </div>
-                            <div className='mt-4'>
-                                <NavLink to={`${_account}${_order}`} className='text-black text-base my-2 hover:text-red-500 hover:underline '>Đơn hàng của bạn</NavLink>
                             </div>
                             <div className='mt-4'>
                                 <NavLink to={`${_account}${_edit}`} className='text-black text-base my-2 hover:text-red-500 hover:underline '>Cập nhật tài khoản</NavLink>

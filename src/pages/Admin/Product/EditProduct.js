@@ -5,6 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { GetDetailProductAction, UpdateProductAction } from './../../../redux/Actions/ManageProductAction';
 import { GetAllAction } from '../../../redux/Actions/ManageGroupAction';
 import { DOMAIN } from '../../../utils/Settings/config';
+import { history } from '../../../App';
+import { _admin, _product } from '../../../utils/util/ConfigPath';
+import { AiOutlineRollback } from 'react-icons/ai';
 
 export default function EditProduct(props) {
     const { TextArea } = Input;
@@ -69,6 +72,13 @@ export default function EditProduct(props) {
     return (
         <Fragment>
             <div>
+                <div>
+                    <button type='button' title='Trở về trang sản phẩm' className='text-2xl py-2 px-5 border-2 border-red-500 rounded-md text-red-500 hover:bg-red-500 hover:text-white' onClick={() => {
+                        history.push(`${_admin}${_product}`)
+                    }}>
+                        <AiOutlineRollback />
+                    </button>
+                </div>
                 <h1 className='text-center text-4xl font-bold text-red-500'>Cập nhật hoa</h1>
                 <form onSubmit={formik.handleSubmit}>
                     <div className='grid grid-cols-7'>

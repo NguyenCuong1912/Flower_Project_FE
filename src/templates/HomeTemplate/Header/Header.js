@@ -5,57 +5,59 @@ import {
     FaPhoneAlt,
 } from "react-icons/fa";
 import {
-    AiOutlineLogin,
-    AiOutlineForm,
     AiOutlineUser
 } from "react-icons/ai";
-import { Input, Dropdown, Space } from 'antd';
+import { Input, Dropdown, Space, Menu } from 'antd';
 import { NavLink } from 'react-router-dom';
 import NavHeader from './NavHeader';
-import { _account, _home, _login, _register } from './../../../utils/util/ConfigPath';
+import { _account, _header, _home, _login, _order, _register } from './../../../utils/util/ConfigPath';
 import { useSelector } from 'react-redux';
 import { USER_LOGIN } from '../../../redux/Types/ManageUserType';
 import { history } from '../../../App';
 import _ from 'lodash'
+
 const { Search } = Input;
 const onSearch = (value) => console.log(value);
 
-const items = [
-    {
-        label: <button onClick={() => {
-            history.push(`${_account}`);
-            window.location.reload();
-        }} className="self-center px-4 py-2 hover:text-red-500">Thông tin tài khoản</button>,
-        key: '0',
-    },
-    {
-        label: <button onClick={() => {
-            history.push(`${_home}`);
-            window.location.reload();
-        }} className="self-center px-4 py-2 hover:text-red-500">Lịch sử đặt hàng</button>,
-        key: '1',
-    },
-    {
-        label: <button onClick={() => {
-            sessionStorage.removeItem(USER_LOGIN);
-            history.push(`${_home}`);
-            window.location.reload();
-        }} className="self-center px-4 py-2 hover:text-red-500">Đăng xuất</button>,
-        key: '2',
-    },
 
-
-];
 
 export default function Header(props) {
     const { userLogin } = useSelector(state => state.ManageUserReducer);
 
+    const menu = (
+        <Menu
+            items={[
+                {
+                    label: <button onClick={() => {
+                        history.push(`${_account}`);
+                        window.location.reload();
+                    }} className="self-center px-4 py-2 hover:text-red-500">Thông tin tài khoản</button>,
+                    key: '0',
+                },
+                {
+                    label: <Fragment>
+                        <button onClick={() => {
+                            history.push(`${_order}/${userLogin.account.id}`);
+                            window.location.reload();
+                        }} className="self-center px-4 py-2 hover:text-red-500">Lịch sử đặt hàng</button>
+                    </Fragment>,
+                    key: '1',
+                },
+                {
+                    label: <button onClick={() => {
+                        sessionStorage.removeItem(USER_LOGIN);
+                        history.push(`${_home}`);
+                        window.location.reload();
+                    }} className="self-center px-4 py-2 hover:text-red-500">Đăng xuất</button>,
+                    key: '2',
+                },
+            ]}
+        />
+    )
     const operations = <Fragment>
         {!_.isEmpty(userLogin) ?
             <Dropdown
-                menu={{
-                    items,
-                }}
+                overlay={menu}
                 trigger={['click']}
             >
                 <span onClick={(e) => e.preventDefault()}>
@@ -69,11 +71,9 @@ export default function Header(props) {
             </Dropdown>
             : <Fragment>
                 <NavLink to={_login} className='flex p-2 mx-2 text-black border rounded hover:border-red-500 hover:text-red-500'>
-                    {/* <AiOutlineLogin className='text-lg my-1 mx-2' /> */}
                     <span>Đăng nhập</span>
                 </NavLink>
                 <NavLink to={_register} className='flex p-2 text-black border rounded hover:border-red-500 hover:text-red-500'>
-                    {/* <AiOutlineForm className='text-lg my-1 mx-2' /> */}
                     <span>Đăng ký</span>
                 </NavLink>
             </Fragment>}
@@ -98,7 +98,7 @@ export default function Header(props) {
                         <div className='ml-12 my-6 cursor-pointer' onClick={() => {
                             history.push(`${_home}`);
                         }}>
-                            <img src='img/logo.png' alt='GiftLove' />
+                            <img src={`${_header}`} alt='GiftLove' />
                         </div>
                         <div className='flex items-center'>
                             <Search

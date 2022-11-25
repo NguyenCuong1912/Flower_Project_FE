@@ -4,6 +4,9 @@ import { useFormik } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
 import { GetAllAction } from '../../../redux/Actions/ManageGroupAction';
 import { AddProductAction } from './../../../redux/Actions/ManageProductAction';
+import { history } from '../../../App';
+import { _admin, _product } from '../../../utils/util/ConfigPath';
+import { AiOutlineRollback } from 'react-icons/ai';
 export default function AddProduct(props) {
     const { TextArea } = Input;
 
@@ -61,6 +64,13 @@ export default function AddProduct(props) {
     return (
         <Fragment>
             <div>
+                <div>
+                    <button type='button' title='Trở về trang sản phẩm' className='text-2xl py-2 px-5 border-2 border-red-500 rounded-md text-red-500 hover:bg-red-500 hover:text-white' onClick={() => {
+                        history.push(`${_admin}${_product}`)
+                    }}>
+                        <AiOutlineRollback />
+                    </button>
+                </div>
                 <h1 className='text-center text-4xl font-bold text-red-500'>Thêm hoa</h1>
                 <form onSubmit={formik.handleSubmit}>
                     <div className='grid grid-cols-7'>

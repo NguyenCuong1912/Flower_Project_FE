@@ -30,7 +30,6 @@ import EditAccount from './pages/Admin/Account/EditAccount';
 import AddAccount from './pages/Admin/Account/AddAccount';
 import AccountTemplate from './templates/AccountTemplate/AccountTemplate';
 import DetailAccount from './pages/User/Account/DetailAccount';
-import OrderAccount from './pages/User/Account/OrderAccount';
 import UpdateAccount from './pages/User/Account/UpdateAccount';
 import ManageGroup from './pages/Admin/GroupFlower/ManageGroup';
 import AddGroupFlower from './pages/Admin/GroupFlower/AddGroupFlower';
@@ -39,6 +38,8 @@ import ManageProduct from './pages/Admin/Product/ManageProduct';
 import AddProduct from './pages/Admin/Product/AddProduct';
 import EditProduct from './pages/Admin/Product/EditProduct';
 import ManageBill from './pages/Admin/Bill/ManageBill';
+import DetailBill from './pages/Admin/Bill/DetailBill';
+import OrderHistory from './pages/User/Account/OrderHistory';
 
 
 
@@ -46,36 +47,40 @@ export const history = createBrowserHistory();
 
 export default function App() {
   return (
-    <Router history={ history }>
+    <Router history={history}>
       <Switch>
-        <HomeTemplate path={ _home } exact Component={ Home } />
-        <HomeTemplate path={ _product } exact Component={ Product } />
-        <HomeTemplate path={ `${_detail}/:id` } exact Component={ ProductDetail } />
-        <HomeTemplate path={ _cart } exact Component={ ShoppingCart } />
-        <AccountTemplate path={ _account } exact Component={ DetailAccount } />
-        <AccountTemplate path={ `${_account}${_order}` } exact Component={ OrderAccount } />
-        <AccountTemplate path={ `${_account}${_edit}` } exact Component={ UpdateAccount } />
+        <HomeTemplate path={_home} exact Component={Home} />
+        <HomeTemplate path={`${_product}/:id`} exact Component={Product} />
+        <HomeTemplate path={`${_detail}/:id`} exact Component={ProductDetail} />
+        <HomeTemplate path={_cart} exact Component={ShoppingCart} />
+        <HomeTemplate path={`${_order}/:id`} exact Component={OrderHistory} />
+
+        <AccountTemplate path={_account} exact Component={DetailAccount} />
+        <AccountTemplate path={`${_account}${_edit}`} exact Component={UpdateAccount} />
 
 
 
 
-        <UserTemplate path={ _login } exact Component={ Login } />
-        <UserTemplate path={ _register } exact Component={ Register } />
+
+        <UserTemplate path={_login} exact Component={Login} />
+        <UserTemplate path={_register} exact Component={Register} />
 
 
-        <AdminTemplate path={ `${_admin}${_account}` } exact Component={ ManageAccount } />
-        <AdminTemplate path={ `${_admin}${_account}${_add}` } exact Component={ AddAccount } />
-        <AdminTemplate path={ `${_admin}${_account}${_edit}/:id` } exact Component={ EditAccount } />
+        <AdminTemplate path={`${_admin}${_account}`} exact Component={ManageAccount} />
+        <AdminTemplate path={`${_admin}${_account}${_add}`} exact Component={AddAccount} />
+        <AdminTemplate path={`${_admin}${_account}${_edit}/:id`} exact Component={EditAccount} />
 
-        <AdminTemplate path={ `${_admin}${_group}` } exact Component={ ManageGroup } />
-        <AdminTemplate path={ `${_admin}${_group}${_add}` } exact Component={ AddGroupFlower } />
-        <AdminTemplate path={ `${_admin}${_group}${_edit}/:id` } exact Component={ EditGroupFlower } />
+        <AdminTemplate path={`${_admin}${_group}`} exact Component={ManageGroup} />
+        <AdminTemplate path={`${_admin}${_group}${_add}`} exact Component={AddGroupFlower} />
+        <AdminTemplate path={`${_admin}${_group}${_edit}/:id`} exact Component={EditGroupFlower} />
 
-        <AdminTemplate path={ `${_admin}${_product}` } exact Component={ ManageProduct } />
-        <AdminTemplate path={ `${_admin}${_product}${_add}` } exact Component={ AddProduct } />
-        <AdminTemplate path={ `${_admin}${_product}${_edit}/:id` } exact Component={ EditProduct } />
+        <AdminTemplate path={`${_admin}${_product}`} exact Component={ManageProduct} />
+        <AdminTemplate path={`${_admin}${_product}${_add}`} exact Component={AddProduct} />
+        <AdminTemplate path={`${_admin}${_product}${_edit}/:id`} exact Component={EditProduct} />
 
-        <AdminTemplate path={ `${_admin}${_bill}` } exact Component={ ManageBill } />
+        <AdminTemplate path={`${_admin}${_bill}`} exact Component={ManageBill} />
+        <AdminTemplate path={`${_admin}${_bill}${_detail}/:id`} exact Component={DetailBill} />
+
 
 
 

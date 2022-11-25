@@ -4,9 +4,9 @@ import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { GetAllProductAction } from '../../../redux/Actions/ManageProductAction';
 import { DOMAIN } from '../../../utils/Settings/config';
-import { _cart, _detail } from '../../../utils/util/ConfigPath';
-import { SET_CART } from '../../../redux/Types/ManageProductType';
-import { history } from '../../../App';
+import { _detail, _name, _src } from '../../../utils/util/ConfigPath';
+import { ADD_CART } from '../../../redux/Types/ManageCartType';
+import { message } from 'antd';
 
 export default function Content3(props) {
 
@@ -21,7 +21,7 @@ export default function Content3(props) {
         <Fragment>
             <div className='my-12 border-b text-center'>
                 <div className='flex justify-center'>
-                    <img src='img/background_title.png' alt='' />
+                    <img src={`${_src}`} alt={`${_name}`} />
                 </div>
                 <h4 className='text-3xl text-red-500 font-serif'>Sản phẩm mới</h4>
             </div>
@@ -42,10 +42,15 @@ export default function Content3(props) {
 
                                 <button type='button' onClick={() => {
                                     dispatch({
-                                        type: SET_CART,
-                                        dataCart: item
+                                        type: ADD_CART,
+                                        data: {
+                                            item: item,
+                                            number: 1
+                                        }
                                     })
-                                    history.push(`${_cart}`)
+                                    message.success('Sản phẩm đã được thêm vào giỏ hàng')
+
+
                                 }} className='px-6 py-2 text-red-600 font-bold border border-red-600 rounded hover:text-white hover:bg-red-600'>Đặt hàng</button>
 
                             </div>

@@ -13,10 +13,8 @@ export class ManageProductService extends baseService {
 
     getAll = (name) => {
         if (name) {
-            console.log("aaa")
             return this.get(`api/Product?name=${name}`)
         } else {
-            console.log("bb")
             return this.get(`api/Product`)
         }
     }

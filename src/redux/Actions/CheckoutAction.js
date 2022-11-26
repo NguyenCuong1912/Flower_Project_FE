@@ -15,6 +15,7 @@ export const CheckoutAction = (data) => {
                     Account_ID: id,
                     ListProduct: data
                 }
+                console.log(data)
                 const result = await checkoutServices.checkout(dataCheckout);
                 if (result.status === 200) {
                     dispatch({

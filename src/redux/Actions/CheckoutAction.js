@@ -1,5 +1,5 @@
 
-import { CLEAR_CART, GET_CHECKOUT_DETAIL, GET_LIST_CART } from '../Types/ManageCartType';
+import { CLEAR_CART, GET_CHECKOUT_DETAIL, GET_CHECKOUT_HISTORY, GET_LIST_CART } from '../Types/ManageCartType';
 import { checkoutServices } from './../../services/ManageCheckout';
 import { history } from './../../App';
 import { _home, _login } from './../../utils/util/ConfigPath';
@@ -38,17 +38,33 @@ export const CheckoutAction = (data) => {
 }
 
 
-export const GetListCheckout = () => {
+export const GetCheckoutHistory = () => {
     return async dispatch => {
         const id = JSON.parse(sessionStorage.getItem("USER_LOGIN")).account.id;
         try {
             const result = await checkoutServices.getCheckout(id);
             if (result.status === 200) {
                 dispatch({
+                    type: GET_CHECKOUT_HISTORY,
+                    data: result.data,
+                })
+            }
+        } catch (error) {
+            console.log('error', error.response?.data)
+            message.warning('Lấy thông tin không thành công!')
+        }
+    }
+}
+
+export const GetListCheckout = () => {
+    return async dispatch => {
+        try {
+            const result = await checkoutServices.getListCart();
+            if (result.status === 200) {
+                dispatch({
                     type: GET_LIST_CART,
                     data: result.data,
                 })
-                console.log("ggg00", result.data)
             }
         } catch (error) {
             console.log('error', error.response?.data)

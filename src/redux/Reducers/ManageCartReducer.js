@@ -1,4 +1,4 @@
-import { ADD_CART, CLEAR_CART, DELETE_CART, UPDATE_CART, GET_LIST_CART, GET_CHECKOUT_DETAIL } from './../Types/ManageCartType';
+import { ADD_CART, CLEAR_CART, DELETE_CART, UPDATE_CART, GET_LIST_CART, GET_CHECKOUT_DETAIL, GET_CHECKOUT_HISTORY } from './../Types/ManageCartType';
 
 const initialState = {
     cart: [
@@ -12,6 +12,7 @@ const initialState = {
         //     Quantity: 2,
         // }
     ],
+    lstCart: [],
     cartHistory: [],
     lstCheckoutDetail: []
 }
@@ -67,9 +68,14 @@ export const ManageCartReducer = (state = initialState, { type, data }) => {
             return { ...state, cart: [] }
 
         case GET_LIST_CART: {
+            state.lstCart = data
+            return { ...state }
+        }
+        case GET_CHECKOUT_HISTORY: {
             state.cartHistory = data
             return { ...state }
         }
+
         case GET_CHECKOUT_DETAIL: {
             state.lstCheckoutDetail = data
             return { ...state }

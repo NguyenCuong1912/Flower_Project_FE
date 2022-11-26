@@ -19,5 +19,9 @@ class CheckoutServices extends baseService {
         return this.get(`api/Checkout/Detail/${id}`)
     }
 
+    getListCart = () => {
+        return this.get(`api/Checkout`)
+    }
+
 }
 export const checkoutServices = new CheckoutServices();

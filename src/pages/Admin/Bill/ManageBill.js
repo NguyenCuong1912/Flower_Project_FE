@@ -14,6 +14,7 @@ const ManageBill = (props) => {
     const dispatch = useDispatch();
 
     const { lstCart } = useSelector(state => state.ManageCartReducer);
+    console.log('a', lstCart)
     useEffect(() => {
         dispatch(GetListCheckout())
     }, [])
